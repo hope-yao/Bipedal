@@ -165,7 +165,7 @@ def heel_strike(state):
 
 def step_cycle(state,pos_sf,_time):
     print('>>>>>>>>>>>>>>>>>>>>>>>initial position<<<<<<<<<<<<<<<<<<<<<<<<<<<')
-    print(np.degrees([state[0],state[2],state[4]]))
+    print(np.degrees([state]))
 
     ttcosd = []
     cnt = 0
@@ -257,14 +257,17 @@ def init():
     return tuple(lines) + (time_text,)
 
 
+import sys
 def animate(i):
-
-    x_bipedal = [0, x_h[i], x_nsk[i], x_nsf[i]]
-    y_bipedal = [0, y_h[i], y_nsk[i], y_nsf[i]]
-    # k=-1
-    # x_bipedal = [0, x_h[k], x_nsk[k], x_nsf[k]]
-    # y_bipedal = [0, y_h[k], y_nsk[k], y_nsf[k]]
-
+    try:
+        # print(len(x_sf),len(x_h),i)
+        x_bipedal = [x_sf[i], x_h[i], x_nsk[i], x_nsf[i]]
+        y_bipedal = [y_sf[i], y_h[i], y_nsk[i], y_nsf[i]]
+    # k=0
+    # x_bipedal = [x_sf[i], x_h[k], x_nsk[k], x_nsf[k]]
+    # y_bipedal = [y_sf[i], y_h[k], y_nsk[k], y_nsf[k]]
+    except:
+        sys.exit("wrong in animation!")
     x_slop = [x_slop_up,x_slop_low,-2]
     y_slop = [y_slop_up,y_slop_low,y_slop_low]
 
@@ -322,24 +325,62 @@ q3d = 0.0
 state = np.radians([q1, q1d, q2, q2d, q3, q3d])
 pos_sf = [0,0]
 
+f = open('out.txt', 'w')
+output = state.tolist()
+f.write(str(output))
+f.write('\n')
+
+# start walking....
 x_h, y_h, x_nsk, y_nsk, x_nsf, y_nsf,state = step_cycle(state, pos_sf, dt)
-# for i in range(1):
-#     ini_state = [state[-1, 0],state[-1, 1],state[-1, 2],state[-1, 3],state[-1, 4],state[-1, 5]]
-#     x_h_new, y_h_new, x_nsk_new, y_nsk_new, x_nsf_new, y_nsf_new, state = step_cycle(ini_state, dt)
-#     x_h = np.insert(x_h,[len(x_h)],x_h_new,axis=0)
-#     y_h = np.insert(y_h,[len(y_h)],y_h_new,axis=0)
-#     x_nsk = np.insert(x_nsk,[len(x_nsk)],x_nsk_new,axis=0)
-#     y_nsk = np.insert(y_nsk,[len(y_nsk)],y_nsk_new,axis=0)
-#     x_nsf = np.insert(x_nsf,[len(x_nsf)],x_nsf_new,axis=0)
-#     y_nsf = np.insert(y_nsf,[len(y_nsf)],y_nsf_new,axis=0)
-#     pos_sf = [x_nsf[-1],y_nsf[-1]]
+x_sf = np.zeros_like(x_h)
+y_sf = np.zeros_like(x_h)
+step_idx = 1
+step_tt = 2
+# update initial condition
+q1 = (state[-1, 2] + state[-1, 4]) / 2
+q1d = (state[-1, 3] + state[-1, 5]) / 2
+q2 = -state[-1, 0]
+q2d = -state[-1, 1]
+q3 = -state[-1, 0]
+q3d = -state[-1, 1]
+ini_state = [q1, q1d, q2, q2d, q3, q3d]
+# update location
+pos_sf = [x_nsf[-1], y_nsf[-1]]
+output = (ini_state)
+f.write(str(output))
+f.write('\n')
+while step_idx<step_tt:
+    # start another step
+    x_h_new, y_h_new, x_nsk_new, y_nsk_new, x_nsf_new, y_nsf_new, state = step_cycle(ini_state, pos_sf, dt)
+    x_sf_new = np.ones_like(x_h_new) * pos_sf[0]
+    y_sf_new = np.ones_like(x_h_new) * pos_sf[1]
+    # add trajectory of new step
+    x_sf = np.insert(x_sf,[len(x_sf)],x_sf_new,axis=0)
+    y_sf = np.insert(y_sf,[len(y_sf)],y_sf_new,axis=0)
+    x_h = np.insert(x_h,[len(x_h)],x_h_new,axis=0)
+    y_h = np.insert(y_h,[len(y_h)],y_h_new,axis=0)
+    x_nsk = np.insert(x_nsk,[len(x_nsk)],x_nsk_new,axis=0)
+    y_nsk = np.insert(y_nsk,[len(y_nsk)],y_nsk_new,axis=0)
+    x_nsf = np.insert(x_nsf,[len(x_nsf)],x_nsf_new,axis=0)
+    y_nsf = np.insert(y_nsf,[len(y_nsf)],y_nsf_new,axis=0)
+    # update initial condition
+    q1 = (state[-1, 2] + state[-1, 4]) / 2
+    q1d = (state[-1, 3] + state[-1, 5]) / 2
+    q2 = -state[-1, 0]
+    q2d = -state[-1, 1]
+    q3 = -state[-1, 0]
+    q3d = -state[-1, 1]
+    ini_state = [q1, 0, q2, 0, q3, 0]
+    # update location
+    pos_sf = [x_nsf[-1],y_nsf[-1]]
+    output = ini_state
+    f.write(str(output))
+    f.write('\n')
 
-# f = open('out.txt', 'w')
-# f.write(str(x_h))
-# f.write(str(state))
-# f.write('\n')
+    step_idx += 1
+f.close()
 
-
+# following code are for animation
 import matplotlib.pyplot as plt
 # from numpy import random
 import matplotlib.animation as animation
@@ -368,5 +409,6 @@ ani = animation.FuncAnimation(fig, animate, np.arange(1, len(x_h)),
                               interval=50, blit=True, init_func=init)
 plt.show()
 # ani.save('PDW.mp4', fps=15)
+
 
 
