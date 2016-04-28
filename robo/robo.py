@@ -164,8 +164,7 @@ def heel_strike(state):
 
 
 def step_cycle(state,pos_sf,_time):
-    print('>>>>>>>>>>>>>>>>>>>>>>>initial position<<<<<<<<<<<<<<<<<<<<<<<<<<<')
-    print(np.degrees([state]))
+    print('start state: ', state)
 
     ttcosd = []
     cnt = 0
@@ -183,21 +182,22 @@ def step_cycle(state,pos_sf,_time):
             cnt += 1
             continue
         # knee strike
-        if  (np.max(-(state[-num_time:,2]))>np.radians(_alpha/2-_gamma)*0.9)\
+        if  (np.max(-(state[-num_time:,2]))>(_alpha/2-_gamma)*0.9)\
         and (chain_num==3) and (np.min(np.abs(state[-num_time:,2]-state[-num_time:,4]))<np.radians(1)):
             tmp = knee_strike(state[-1])
             state = np.insert(state, [len(state)], tmp, axis=0)
             chain_num = 2
-            print('===============================================knee strike, time: %s' % (cnt*_time))
-            print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
+            # print('===============================================knee strike, time: %s' % (cnt*_time))
+            # print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
             continue
         # heel strike
         if (chain_num==2) and cosd<(3): # in degree
             tmp = heel_strike(state[-1])
             state = np.insert(state, [len(state)], tmp, axis=0)
             chain_num = 3
-            print('===============================================heel strike, time: %s' % (cnt*_time))
-            print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
+            # print('===============================================heel strike, time: %s' % (cnt*_time))
+            # print(np.degrees([state[-1,0],state[-1,2],state[-1,4]))
+            print('end state: ',state[-1,:])
             break
         # three linked chain
         if (chain_num==3):
@@ -227,7 +227,7 @@ def step_cycle(state,pos_sf,_time):
         y_nsf_tmp = y_nsk_tmp - ls*cos(q3)
 
         v1 = [(x_nsf_tmp[i],y_nsf_tmp[i]) for i in range(num_time)]
-        v2 = [cos(np.radians(_gamma)),-sin(np.radians(_gamma))]
+        v2 = [cos((_gamma)),-sin((_gamma))]
         ab = np.dot(v1, v2)
         cosd = [np.degrees(math.acos( 0.999* ab[i] / np.linalg.norm((x_nsf_tmp[i],y_nsf_tmp[i])))) for i in range(num_time)] #don't mater to much for origin or nonstance feet
         ttcosd = ttcosd + (cosd)
@@ -279,111 +279,16 @@ def animate(i):
     return tuple(lines) + (time_text,)
 
 
+def show_walking():
 
-
-# Passive Dynamic Walking for bipedal robot
-# % reset
-
-from numpy import sin, cos
-import numpy as np
-import scipy.integrate as integrate
-import math
-
-# parameters of leg structure
-mt = 0.5  # mass of thigh
-ms = 0.05  # mass of shank
-mh = 0.5   #mass of hip
-a1 = 0.375
-b1 = 0.125
-a2 = 0.175
-b2 = 0.325
-lt = a2 + b2  # length of thigh
-ls = a1 + b1  # length of shank
-l = lt + ls
-
-g = 9.8  # acceleration due to gravity, in m/s^2
-dt = 0.01 # time step of simulation
-step_idx = 1
-step_tt = 1
-
-# slop of terran
-_gamma = (9)
-x_slop_low = 2 * cos(np.radians(_gamma))
-x_slop_up = -x_slop_low
-y_slop_low = -2 * sin(np.radians(_gamma))
-y_slop_up = -y_slop_low
-
-
-# initial states, defined by angle between two legs
-_alpha = (20)
-q1 = _alpha/2 - _gamma
-q1d = 0.0
-q2 = _alpha/2 + _gamma
-q2d = 0.0
-q3 = q2
-q3d = 0.0
-state = np.radians([q1, q1d, q2, q2d, q3, q3d])
-pos_sf = [0,0]
-
-f = open('out.txt', 'w')
-output = np.degrees(state).tolist()
-f.write(str(output))
-f.write('\n')
-
-# start walking....
-x_h, y_h, x_nsk, y_nsk, x_nsf, y_nsf,state = step_cycle(state, pos_sf, dt)
-x_sf = np.zeros_like(x_h)
-y_sf = np.zeros_like(x_h)
-# update initial condition
-q1 = (state[-1, 2] + state[-1, 4]) / 2
-q1d = (state[-1, 3] + state[-1, 5]) / 2
-q2 = -state[-1, 0]
-q2d = -state[-1, 1]
-q3 = -state[-1, 0]
-q3d = -state[-1, 1]
-ini_state = [q1, q1d, q2, q2d, q3, q3d]
-# update location
-pos_sf = [x_nsf[-1], y_nsf[-1]]
-output = [(kk)*180/np.pi for kk in ini_state]
-f.write(str(output))
-f.write('\n')
-# more steps...
-while step_idx<step_tt:
-    # start another step
-    x_h_new, y_h_new, x_nsk_new, y_nsk_new, x_nsf_new, y_nsf_new, state = step_cycle(ini_state, pos_sf, dt)
-    x_sf_new = np.ones_like(x_h_new) * pos_sf[0]
-    y_sf_new = np.ones_like(x_h_new) * pos_sf[1]
-    # add trajectory of new step
-    x_sf = np.insert(x_sf,[len(x_sf)],x_sf_new,axis=0)
-    y_sf = np.insert(y_sf,[len(y_sf)],y_sf_new,axis=0)
-    x_h = np.insert(x_h,[len(x_h)],x_h_new,axis=0)
-    y_h = np.insert(y_h,[len(y_h)],y_h_new,axis=0)
-    x_nsk = np.insert(x_nsk,[len(x_nsk)],x_nsk_new,axis=0)
-    y_nsk = np.insert(y_nsk,[len(y_nsk)],y_nsk_new,axis=0)
-    x_nsf = np.insert(x_nsf,[len(x_nsf)],x_nsf_new,axis=0)
-    y_nsf = np.insert(y_nsf,[len(y_nsf)],y_nsf_new,axis=0)
-    # update initial condition
-    q1 = (state[-1, 2] + state[-1, 4]) / 2
-    q1d = (state[-1, 3] + state[-1, 5]) / 2
-    q2 = -state[-1, 0]
-    q2d = -state[-1, 1]
-    q3 = -state[-1, 0]
-    q3d = -state[-1, 1]
-    ini_state = [q1, 0, q2, 0, q3, 0]
-    # update location
-    pos_sf = [x_nsf[-1],y_nsf[-1]]
-    output = [(kk) * 180 / np.pi for kk in ini_state]
-    f.write(str(output))
-    f.write('\n')
-
-    step_idx += 1
-f.close()
-
-# show_walking()
-if 0:
     # following code are for animation
-    import matplotlib.pyplot as plt
-    import matplotlib.animation as animation
+
+    # slop
+    global x_slop_low,x_slop_up,y_slop_low,y_slop_up
+    x_slop_low = 2 * cos((_gamma))
+    x_slop_up = -x_slop_low
+    y_slop_low = -2 * sin((_gamma))
+    y_slop_up = -y_slop_low
 
     print('start animation...')
 
@@ -393,6 +298,7 @@ if 0:
     plt.xlabel('Longitude')
     plt.ylabel('Latitude')
 
+    global lines, time_text
     lines = []
     lobj = ax1.plot([], [], 'o-', lw=2, color="black")[0]
     lines.append(lobj)
@@ -401,13 +307,150 @@ if 0:
 
     time_text = ax1.text(0.05, 0.9, '', transform=ax1.transAxes)
 
-    # call the animator.  blit=True means only re-draw the parts that have changed.
-    # ani = animation.FuncAnimation(fig, animate, init_func=init,
-    #                                frames=300, interval=10, blit=True)
-
     ani = animation.FuncAnimation(fig, animate, np.arange(1, len(x_h)),
                                   interval=1000 * dt, blit=True, init_func=init)
     plt.show()
     # ani.save('PDW.mp4', fps=15)
 
-# from numpy import random
+def robo():
+    # Passive Dynamic Walking for bipedal robot
+    # % reset
+
+
+    # parameters of leg structure
+    paras = np.loadtxt('parameters.txt', delimiter='  ')
+    try:
+        last = paras[-1,:]
+    except:
+        last = paras
+    c_alpha = last[0] # defined by angle between two legs
+    c_mh = last[1]  # mass of thigh
+    c_mt = last[2]  # mass of shank
+    c_a1 = last[3]
+    c_b1 = last[4]
+    c_a2 = last[5]
+    c_ms = (1-c_mh-c_mt)
+    c_b2 = 1-c_a1-c_b1-c_a2
+
+    global mh,mt,ms,a1,b1,a2,b2,_alpha,lt,ls,l
+    M = 1# total weight
+    L = 1 # total lenth
+    mh = M * c_mh   #mass of hip
+    mt = M * c_mt  # mass of thigh
+    ms = M * c_ms # mass of shank
+    a1 = L * c_a1
+    b1 = L * c_b1
+    a2 = L * c_a2
+    b2 = L * c_b2
+    _alpha  = np.radians(c_alpha * 20)
+    lt = a2 + b2  # length of thigh
+    ls = a1 + b1  # length of shank
+    l = lt + ls
+
+    # _alpha = (20) # defined by angle between two legs
+    # mt = 0.5  # mass of thigh
+    # ms = 0.05  # mass of shank
+    # mh = 0.5   #mass of hip
+    # a1 = 0.375
+    # b1 = 0.125
+    # a2 = 0.175
+    # b2 = 0.325
+    # lt = a2 + b2  # length of thigh
+    # ls = a1 + b1  # length of shank
+    # l = lt + ls
+
+
+    global g,dt
+    g = 9.8  # acceleration due to gravity, in m/s^2
+    dt = 0.01 # time step of simulation
+    step_idx = 1
+    step_tt = 1
+
+    # slop of terran
+    global _gamma
+    _gamma = np.radians(9)
+
+
+    # initial states,
+    q1 = _alpha/2 - _gamma
+    q1d = 0.0
+    q2 = _alpha/2 + _gamma
+    q2d = 0.0
+    q3 = q2
+    q3d = 0.0
+    state = [q1, q1d, q2, q2d, q3, q3d]
+    pos_sf = [0,0]
+
+    # f = open('out.txt', 'w')
+    # output = np.degrees(state).tolist()
+    # f.write(str(output))
+    # f.write('\n')
+
+    global x_sf,y_sf,x_h,y_h,x_nsk,y_nsk,x_nsf,y_nsf
+
+    # start walking....
+    x_h, y_h, x_nsk, y_nsk, x_nsf, y_nsf,state = step_cycle(state, pos_sf, dt)
+    x_sf = np.zeros_like(x_h)
+    y_sf = np.zeros_like(x_h)
+    # update initial condition
+    q1 = (state[-1, 2] + state[-1, 4]) / 2
+    q1d = (state[-1, 3] + state[-1, 5]) / 2
+    q2 = -state[-1, 0]
+    q2d = -state[-1, 1]
+    q3 = -state[-1, 0]
+    q3d = -state[-1, 1]
+    ini_state = [q1, q1d, q2, q2d, q3, q3d]
+    # update location
+    pos_sf = [x_nsf[-1], y_nsf[-1]]
+    # ini_state_deg = [(kk)*180/np.pi for kk in ini_state]
+    diff = ini_state - state
+    stability = np.linalg.norm(diff)
+    disp = cos(_gamma + np.pi/2 - q3)
+    output = [[stability, disp]]
+    np.savetxt('out.txt',output, delimiter='  ')
+    # f.write(str(output))
+    # f.write('\n')
+
+    # more steps...
+    while step_idx<step_tt:
+        # start another step
+        x_h_new, y_h_new, x_nsk_new, y_nsk_new, x_nsf_new, y_nsf_new, state = step_cycle(ini_state, pos_sf, dt)
+        x_sf_new = np.ones_like(x_h_new) * pos_sf[0]
+        y_sf_new = np.ones_like(x_h_new) * pos_sf[1]
+        # add trajectory of new step
+        x_sf = np.insert(x_sf,[len(x_sf)],x_sf_new,axis=0)
+        y_sf = np.insert(y_sf,[len(y_sf)],y_sf_new,axis=0)
+        x_h = np.insert(x_h,[len(x_h)],x_h_new,axis=0)
+        y_h = np.insert(y_h,[len(y_h)],y_h_new,axis=0)
+        x_nsk = np.insert(x_nsk,[len(x_nsk)],x_nsk_new,axis=0)
+        y_nsk = np.insert(y_nsk,[len(y_nsk)],y_nsk_new,axis=0)
+        x_nsf = np.insert(x_nsf,[len(x_nsf)],x_nsf_new,axis=0)
+        y_nsf = np.insert(y_nsf,[len(y_nsf)],y_nsf_new,axis=0)
+        # update initial condition
+        q1 = (state[-1, 2] + state[-1, 4]) / 2
+        q1d = (state[-1, 3] + state[-1, 5]) / 2
+        q2 = -state[-1, 0]
+        q2d = -state[-1, 1]
+        q3 = -state[-1, 0]
+        q3d = -state[-1, 1]
+        ini_state = [q1, 0, q2, 0, q3, 0]
+        # update location
+        pos_sf = [x_nsf[-1],y_nsf[-1]]
+        output = [(kk)  for kk in ini_state]
+        # f.write(str(output))
+        # f.write('\n')
+
+        step_idx += 1
+    # f.close()
+    show_walking()
+
+
+from numpy import sin, cos
+import numpy as np
+import scipy.integrate as integrate
+import math
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+
+robo()
+
