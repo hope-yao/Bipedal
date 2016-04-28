@@ -24,8 +24,8 @@
       <file leaf-file-name="robo.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/robo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="647">
-              <caret line="372" column="26" selection-start-line="372" selection-start-column="26" selection-end-line="372" selection-end-column="26" />
+            <state relative-caret-position="140">
+              <caret line="292" column="0" selection-start-line="292" selection-start-column="0" selection-end-line="298" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -88,8 +88,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="372" />
-    <option name="y" value="63" />
+    <option name="x" value="536" />
+    <option name="y" value="62" />
     <option name="width" value="1319" />
     <option name="height" value="979" />
   </component>
@@ -351,7 +351,7 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="372" y="63" width="1319" height="979" extended-state="0" />
+    <frame x="536" y="62" width="1319" height="979" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26535255" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -399,18 +399,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/robo.py</url>
-          <line>383</line>
-          <option name="timeStamp" value="30" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/robo.py</url>
-          <line>353</line>
+          <line>352</line>
           <option name="timeStamp" value="31" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/robo.py</url>
-          <line>348</line>
-          <option name="timeStamp" value="32" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -515,8 +505,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/robo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="647">
-          <caret line="372" column="26" selection-start-line="372" selection-start-column="26" selection-end-line="372" selection-end-column="26" />
+        <state relative-caret-position="140">
+          <caret line="292" column="0" selection-start-line="292" selection-start-column="0" selection-end-line="298" selection-end-column="10" />
           <folding />
         </state>
       </provider>

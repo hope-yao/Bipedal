@@ -172,14 +172,14 @@ def step_cycle(state,pos_sf,_time):
     num_time = 2
     dt = _time / num_time
     chain_num=3 # starts with three-chain state
-    while cnt<300: # usually it takes less than three seconds for a step
-        print('cnt: ',cnt)
+    while cnt<3/_time: # usually it takes less than three seconds for a step
+        # print('cnt: ',cnt)
         t = np.arange(0.0, _time, dt)
         if cnt==0:
             tmp = integrate.odeint(three_linked_chain, state, t)
             state = np.insert(tmp[1:len(tmp)+1],[0],state,axis=0)
-            print('three linked chain, time: %s <<<' % (cnt*_time))
-            print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
+            # print('three linked chain, time: %s <<<' % (cnt*_time))
+            # print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
             cnt += 1
             continue
         # knee strike
@@ -203,16 +203,16 @@ def step_cycle(state,pos_sf,_time):
         if (chain_num==3):
             tmp = integrate.odeint(three_linked_chain, state[-1], t)
             state = np.insert(tmp[1:len(tmp)+1],[0],state,axis=0)
-            print('three linked chain, time: %s <<<' % (cnt*_time))
-            print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
+            # print('three linked chain, time: %s <<<' % (cnt*_time))
+            # print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
             chain_num = 3
             cnt += 1
         # two linked chain
         if (chain_num==2):
             tmp = integrate.odeint(two_linked_chain, state[-1], t)
             state = np.insert(tmp[1:len(tmp)+1],[0],state,axis=0)
-            print('two linked chain, time: %s <<<' % (cnt*_time))
-            print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
+            # print('two linked chain, time: %s <<<' % (cnt*_time))
+            # print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
             chain_num = 2
             cnt += 1
 
@@ -229,14 +229,11 @@ def step_cycle(state,pos_sf,_time):
         v1 = [(x_nsf_tmp[i],y_nsf_tmp[i]) for i in range(num_time)]
         v2 = [cos(np.radians(_gamma)),-sin(np.radians(_gamma))]
         ab = np.dot(v1, v2)
-        print(ab)
         cosd = [np.degrees(math.acos( 0.999* ab[i] / np.linalg.norm((x_nsf_tmp[i],y_nsf_tmp[i])))) for i in range(num_time)] #don't mater to much for origin or nonstance feet
-        # tmp = ab / np.linalg.norm([x_nsf_tmp,y_nsf_tmp])
-        # cosd = [np.degrees(math.acos(tmp[0]))]
         ttcosd = ttcosd + (cosd)
         cosd = min(np.abs(cosd))
-        print('cosd: ',cosd)
-        print('chain_num: ',chain_num)
+        # print('cosd: ',cosd)
+        # print('chain_num: ',chain_num)
 
     q1 = state[:,0]
     q2 = state[:,2]
@@ -261,8 +258,8 @@ import sys
 def animate(i):
     try:
         # print(len(x_sf),len(x_h),i)
-        x_bipedal = [x_sf[i], x_h[i], x_nsk[i], x_nsf[i]]
-        y_bipedal = [y_sf[i], y_h[i], y_nsk[i], y_nsf[i]]
+        x_bipedal = [x_sf[i],(x_sf[i] + x_h[i])/2, x_h[i], x_nsk[i], x_nsf[i]]
+        y_bipedal = [y_sf[i],(y_sf[i] + y_h[i])/2, y_h[i], y_nsk[i], y_nsf[i]]
     # k=0
     # x_bipedal = [x_sf[i], x_h[k], x_nsk[k], x_nsf[k]]
     # y_bipedal = [y_sf[i], y_h[k], y_nsk[k], y_nsf[k]]
@@ -277,9 +274,10 @@ def animate(i):
     for lnum,line in enumerate(lines):
         line.set_data(xlist[lnum], ylist[lnum]) # set data for each line separately.
 
-    time_text.set_text(time_template % (i*dt))
+    time_text.set_text('time = %.3fs' % (i*dt))
 
     return tuple(lines) + (time_text,)
+
 
 
 
@@ -305,6 +303,8 @@ l = lt + ls
 
 g = 9.8  # acceleration due to gravity, in m/s^2
 dt = 0.01 # time step of simulation
+step_idx = 1
+step_tt = 1
 
 # slop of terran
 _gamma = (9)
@@ -326,7 +326,7 @@ state = np.radians([q1, q1d, q2, q2d, q3, q3d])
 pos_sf = [0,0]
 
 f = open('out.txt', 'w')
-output = state.tolist()
+output = np.degrees(state).tolist()
 f.write(str(output))
 f.write('\n')
 
@@ -334,8 +334,6 @@ f.write('\n')
 x_h, y_h, x_nsk, y_nsk, x_nsf, y_nsf,state = step_cycle(state, pos_sf, dt)
 x_sf = np.zeros_like(x_h)
 y_sf = np.zeros_like(x_h)
-step_idx = 1
-step_tt = 2
 # update initial condition
 q1 = (state[-1, 2] + state[-1, 4]) / 2
 q1d = (state[-1, 3] + state[-1, 5]) / 2
@@ -346,9 +344,10 @@ q3d = -state[-1, 1]
 ini_state = [q1, q1d, q2, q2d, q3, q3d]
 # update location
 pos_sf = [x_nsf[-1], y_nsf[-1]]
-output = (ini_state)
+output = [(kk)*180/np.pi for kk in ini_state]
 f.write(str(output))
 f.write('\n')
+# more steps...
 while step_idx<step_tt:
     # start another step
     x_h_new, y_h_new, x_nsk_new, y_nsk_new, x_nsf_new, y_nsf_new, state = step_cycle(ini_state, pos_sf, dt)
@@ -373,42 +372,42 @@ while step_idx<step_tt:
     ini_state = [q1, 0, q2, 0, q3, 0]
     # update location
     pos_sf = [x_nsf[-1],y_nsf[-1]]
-    output = ini_state
+    output = [(kk) * 180 / np.pi for kk in ini_state]
     f.write(str(output))
     f.write('\n')
 
     step_idx += 1
 f.close()
 
-# following code are for animation
-import matplotlib.pyplot as plt
+# show_walking()
+if 0:
+    # following code are for animation
+    import matplotlib.pyplot as plt
+    import matplotlib.animation as animation
+
+    print('start animation...')
+
+    fig = plt.figure()
+    ax1 = plt.axes(xlim=(-2, 2), ylim=(-2, 2))
+    ax1.grid(True)
+    plt.xlabel('Longitude')
+    plt.ylabel('Latitude')
+
+    lines = []
+    lobj = ax1.plot([], [], 'o-', lw=2, color="black")[0]
+    lines.append(lobj)
+    lobj = ax1.plot([], [], lw=2, color="red")[0]
+    lines.append(lobj)
+
+    time_text = ax1.text(0.05, 0.9, '', transform=ax1.transAxes)
+
+    # call the animator.  blit=True means only re-draw the parts that have changed.
+    # ani = animation.FuncAnimation(fig, animate, init_func=init,
+    #                                frames=300, interval=10, blit=True)
+
+    ani = animation.FuncAnimation(fig, animate, np.arange(1, len(x_h)),
+                                  interval=1000 * dt, blit=True, init_func=init)
+    plt.show()
+    # ani.save('PDW.mp4', fps=15)
+
 # from numpy import random
-import matplotlib.animation as animation
-fig = plt.figure()
-ax1 = plt.axes(xlim=(-2, 2), ylim=(-2,2))
-ax1.grid(True)
-plt.xlabel('Longitude')
-plt.ylabel('Latitude')
-
-lines = []
-lobj = ax1.plot([],[],'o-',lw=2,color="black")[0]
-lines.append(lobj)
-lobj = ax1.plot([],[],lw=2,color="red")[0]
-lines.append(lobj)
-
-time_template = 'time = %.3fs'
-time_text = ax1.text(0.05, 0.9, '', transform=ax1.transAxes)
-
-print('hello')
-
-# call the animator.  blit=True means only re-draw the parts that have changed.
-# ani = animation.FuncAnimation(fig, animate, init_func=init,
-#                                frames=300, interval=10, blit=True)
-
-ani = animation.FuncAnimation(fig, animate, np.arange(1, len(x_h)),
-                              interval=50, blit=True, init_func=init)
-plt.show()
-# ani.save('PDW.mp4', fps=15)
-
-
-
