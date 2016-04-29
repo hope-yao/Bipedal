@@ -1,3 +1,8 @@
+import inspect
+def lineno():
+    """Returns the current line number in our program."""
+    return inspect.currentframe().f_back.f_lineno
+
 
 def three_linked_chain(state, t):
     q1 = state[0]
@@ -175,8 +180,13 @@ def step_cycle(state,pos_sf,_time):
         # print('cnt: ',cnt)
         t = np.arange(0.0, _time, dt)
         if cnt==0:
-            tmp = integrate.odeint(three_linked_chain, state, t)
-            state = np.insert(tmp[1:len(tmp)+1],[0],state,axis=0)
+            try:
+                tmp = integrate.odeint(three_linked_chain, state, t)
+                state = np.insert(tmp[1:len(tmp)+1],[0],state,axis=0)
+            except:
+                print(state)
+                print(lineno())
+                sys.exit("wrong in this step!")
             # print('three linked chain, time: %s <<<' % (cnt*_time))
             # print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
             cnt += 1
@@ -201,20 +211,30 @@ def step_cycle(state,pos_sf,_time):
             break
         # three linked chain
         if (chain_num==3):
-            tmp = integrate.odeint(three_linked_chain, state[-1], t)
-            state = np.insert(tmp[1:len(tmp)+1],[0],state,axis=0)
-            # print('three linked chain, time: %s <<<' % (cnt*_time))
-            # print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
-            chain_num = 3
-            cnt += 1
+            try:
+                tmp = integrate.odeint(three_linked_chain, state[-1], t)
+                state = np.insert(tmp[1:len(tmp)+1],[0],state,axis=0)
+                # print('three linked chain, time: %s <<<' % (cnt*_time))
+                # print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
+                chain_num = 3
+                cnt += 1
+            except:
+                print(state)
+                print(lineno())
+                sys.exit("wrong in this step!")
         # two linked chain
         if (chain_num==2):
-            tmp = integrate.odeint(two_linked_chain, state[-1], t)
-            state = np.insert(tmp[1:len(tmp)+1],[0],state,axis=0)
-            # print('two linked chain, time: %s <<<' % (cnt*_time))
-            # print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
-            chain_num = 2
-            cnt += 1
+            try:
+                tmp = integrate.odeint(two_linked_chain, state[-1], t)
+                state = np.insert(tmp[1:len(tmp)+1],[0],state,axis=0)
+                # print('two linked chain, time: %s <<<' % (cnt*_time))
+                # print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
+                chain_num = 2
+                cnt += 1
+            except:
+                print(state)
+                print(lineno())
+                sys.exit("wrong in this step!")
 
         q1 = tmp[:,0]
         q2 = tmp[:,2]
@@ -257,12 +277,11 @@ def init():
 import sys
 def animate(i):
     try:
-        # print(len(x_sf),len(x_h),i)
-        x_bipedal = [x_sf[i],(x_sf[i] + x_h[i])/2, x_h[i], x_nsk[i], x_nsf[i]]
-        y_bipedal = [y_sf[i],(y_sf[i] + y_h[i])/2, y_h[i], y_nsk[i], y_nsf[i]]
-    # k=0
-    # x_bipedal = [x_sf[i], x_h[k], x_nsk[k], x_nsf[k]]
-    # y_bipedal = [y_sf[i], y_h[k], y_nsk[k], y_nsf[k]]
+        x_bipedal = [x_sf[i], x_sk[i], x_h[i], x_nsk[i], x_nsf[i]]
+        y_bipedal = [y_sf[i], y_sk[i], y_h[i], y_nsk[i], y_nsf[i]]
+        # k=0
+        # x_bipedal = [x_sf[i], x_sk[i], x_h[k], x_nsk[k], x_nsf[k]]
+        # y_bipedal = [y_sf[i], y_sk[i], y_h[k], y_nsk[k], y_nsf[k]]
     except:
         sys.exit("wrong in animation!")
     x_slop = [x_slop_up,x_slop_low,-2]
@@ -428,6 +447,9 @@ def robo(show_ani):
     # f.close()
 
     if show_ani:
+        global x_sk, y_sk
+        x_sk = x_sf * (c_a1 + c_b1) + x_h * (1 - c_a1 - c_b1)
+        y_sk = y_sf * (c_a1 + c_b1) + y_h * (1 - c_a1 - c_b1)
         show_walking()
 
 
