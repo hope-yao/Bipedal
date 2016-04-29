@@ -312,7 +312,7 @@ def show_walking():
     plt.show()
     # ani.save('PDW.mp4', fps=15)
 
-def robo():
+def robo(show_ani):
     # Passive Dynamic Walking for bipedal robot
     # % reset
 
@@ -346,19 +346,6 @@ def robo():
     lt = a2 + b2  # length of thigh
     ls = a1 + b1  # length of shank
     l = lt + ls
-
-    # _alpha = (20) # defined by angle between two legs
-    # mt = 0.5  # mass of thigh
-    # ms = 0.05  # mass of shank
-    # mh = 0.5   #mass of hip
-    # a1 = 0.375
-    # b1 = 0.125
-    # a2 = 0.175
-    # b2 = 0.325
-    # lt = a2 + b2  # length of thigh
-    # ls = a1 + b1  # length of shank
-    # l = lt + ls
-
 
     global g,dt
     g = 9.8  # acceleration due to gravity, in m/s^2
@@ -403,7 +390,7 @@ def robo():
     # update location
     pos_sf = [x_nsf[-1], y_nsf[-1]]
     # ini_state_deg = [(kk)*180/np.pi for kk in ini_state]
-    diff = ini_state - state
+    diff = ini_state - state[-1]
     stability = np.linalg.norm(diff)
     disp = cos(_gamma + np.pi/2 - q3)
     output = [[stability, disp]]
@@ -436,13 +423,12 @@ def robo():
         ini_state = [q1, 0, q2, 0, q3, 0]
         # update location
         pos_sf = [x_nsf[-1],y_nsf[-1]]
-        output = [(kk)  for kk in ini_state]
-        # f.write(str(output))
-        # f.write('\n')
 
         step_idx += 1
     # f.close()
-    show_walking()
+
+    if show_ani:
+        show_walking()
 
 
 from numpy import sin, cos
@@ -452,5 +438,5 @@ import math
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-robo()
+# robo()
 

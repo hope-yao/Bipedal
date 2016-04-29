@@ -4,51 +4,50 @@
 # objective2: speed
 # objective function is based on bipedal simulator robo.py
 
-# from numpy import random
-import numpy as np
 from scipy.optimize import minimize
-import os
 
-from numpy import sin, cos
 import numpy as np
-import scipy.integrate as integrate
-import math
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-
+# from numpy import random
+# import os
+# from numpy import sin, cos
+# import scipy.integrate as integrate
+# import math
+# import matplotlib.pyplot as plt
+# import matplotlib.animation as animation
 import robo
 
 
 c_alpha =  1 # defined by angle between two legs, times 20 in degree
-# constrain: c_mh>0 c_mt>0 c_mh+c_mt<1
+# constrain: c_mh>0.3 c_mt>0.1 c_mh+c_mt<1
 c_mh = 0.47
 c_mt = 0.47
 c_ms = (1-c_mh-c_mt)
 
-c_a1 = 0.375
-c_b1 = 0.125
-c_a2 = 0.175
+c_a1 = 0.25
+c_b1 = 0.25
+c_a2 = 0.25
 c_b2 = 1-c_a1-c_b1--c_a2
 
 leg_struc = np.array([[c_alpha, c_mh, c_mt, c_a1, c_b1, c_a2]])
 
-def obj_fun(x):
+def obj_fun(x,show_ani):
     print(">>>>>>>>>>>>>>>>>>>>>>>leg structure<<<<<<<<<<<<<<<<<<<<<<<<<<<")
     print(x)
     para_file = 'parameters.txt'
     np.savetxt(para_file, x, delimiter='  ')
-    # os.system('python robo.py')
-    robo()
+    robo.robo(show_ani)
     out_file = 'out.txt'
     obj_val = np.loadtxt(out_file, delimiter='  ')
-
-    paerto_obj = obj_val[0] * pareto_para[0] - obj_val[1]*pareto_para[1] # minimize negative displacement
+    # minimize negative displacement, times 10 to make it around same magnitude
+    paerto_obj = obj_val[0] * pareto_para[0] - obj_val[1]*pareto_para[1]*100
     return paerto_obj
 
 
 pareto_para = [[],[]]
 num_pareto_points = 1
-for w in range(num_pareto_points):
+tt = [(i / (num_pareto_points+1)) for i in range(num_pareto_points+1)]
+tt.pop(0)
+for w in tt:
     pareto_para[0] = w / num_pareto_points
     pareto_para[1] = 1 - pareto_para[0]
 
@@ -61,12 +60,14 @@ for w in range(num_pareto_points):
          'fun': lambda x: np.array([1 - (x[3] + x[4] + x[5])]),
          'jac': lambda x: np.array([0.0, 0.0, 0.0, -1.0, -1.0, -1.0])}
     )
-    para_bound = [(0,3),(0,1),(0,1),(0,1),(0,1),(0,1)]
-    res = minimize(obj_fun, leg_struc, method='L-BFGS-B', jac=None, bounds=para_bound, options={'maxfun':30, 'eps':1e-4, 'disp': True})
-    # res = minimize(obj_fun, leg_struc, constraints=cons, method='SLSQP', jac=None, options={'maxiter':300, 'eps':1e-4, 'disp': True})
+    para_bound = [(0.5,3),(0.3,0.9),(0.2,0.8),(0.01,0.99),(0.01,0.99),(0.01,0.99)]
+    res = minimize(obj_fun, leg_struc, args=0, method='L-BFGS-B', jac=None, bounds=para_bound, options={'maxfun':3000, 'eps':1e-5, 'disp': False})
+    # res = minimize(obj_fun, leg_struc, constraints=cons, method='SLSQP', jac=None, bounds=para_bound, options={'maxiter':30, 'eps':1e-4, 'disp': True})
 
 
 print('optimization result:')
 print(res)
 
 # fmin_l_bfgs_b(obj_fun, leg_struc, approx_grad=True, bounds=None, m=10, factr=10000000.0, pgtol=1e-05, epsilon=1e-08, iprint=-1, maxfun=15000, maxiter=15000, disp=None, callback=None, maxls=20)
+# os.system('python robo.py')
+robo.robo(1)
