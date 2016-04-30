@@ -179,7 +179,8 @@ def step_cycle(state,pos_sf,_time):
     num_time = 2
     dt = _time / num_time
     chain_num=3 # starts with three-chain state
-    while cnt<60/_time: # usually it takes less than sixteen seconds for a step
+    success = 1
+    while True:
         # print('cnt: ',cnt)
         t = np.arange(0.0, _time, dt)
         if cnt==0:
@@ -204,12 +205,12 @@ def step_cycle(state,pos_sf,_time):
             # print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
             continue
         # heel strike
-        if (chain_num==2) and cosd<(3): # in degree
+        if (chain_num==2) and (dist<0.01): # in degree
             tmp = heel_strike(state[-1])
             state = np.insert(state, [len(state)], tmp, axis=0)
             chain_num = 3
             # print('===============================================heel strike, time: %s' % (cnt*_time))
-            # print(np.degrees([state[-1,0],state[-1,2],state[-1,4]))
+            # print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
             print('end state: ',state[-1,:])
             break
         # three linked chain
@@ -238,6 +239,10 @@ def step_cycle(state,pos_sf,_time):
                 print(state)
                 print(lineno())
                 sys.exit("wrong in this step!")
+        if cnt>3/_time: # usually it takes less than three seconds for a step
+            print("this is not a good step!")
+            success = 0
+            break
 
         q1 = tmp[:,0]
         q2 = tmp[:,2]
@@ -252,10 +257,12 @@ def step_cycle(state,pos_sf,_time):
         v1 = [(x_nsf_tmp[i],y_nsf_tmp[i]) for i in range(num_time)]
         v2 = [cos((_gamma)),-sin((_gamma))]
         ab = np.dot(v1, v2)
-        cosd = [np.degrees(math.acos( 0.999* ab[i] / np.linalg.norm((x_nsf_tmp[i],y_nsf_tmp[i])))) for i in range(num_time)] #don't mater to much for origin or nonstance feet
-        ttcosd = ttcosd + (cosd)
-        cosd = min(np.abs(cosd))
-        # print('cosd: ',cosd)
+        dist = 1000
+        for v in ab:
+            v3 = np.asarray(v1) - v*np.asarray(v2)
+            tmpdist = np.linalg.norm(v3)
+            dist = min(tmpdist,dist)
+        # print('dist: ',dist)
         # print('chain_num: ',chain_num)
 
     q1 = state[:,0]
@@ -268,7 +275,7 @@ def step_cycle(state,pos_sf,_time):
     x_nsf = x_nsk - ls*sin(q3)
     y_nsf = y_nsk - ls*cos(q3)
 
-    return x_h,y_h,x_nsk,y_nsk,x_nsf,y_nsf,state
+    return x_h,y_h,x_nsk,y_nsk,x_nsf,y_nsf,state, success
 
 def init():
     for line in lines:
@@ -396,11 +403,25 @@ def robo(show_ani):
     # f.write('\n')
 
     global x_sf,y_sf,x_h,y_h,x_nsk,y_nsk,x_nsf,y_nsf
+    global x_sk, y_sk
 
     # start walking....
-    x_h, y_h, x_nsk, y_nsk, x_nsf, y_nsf,state = step_cycle(state, pos_sf, dt)
+    x_h, y_h, x_nsk, y_nsk, x_nsf, y_nsf,state, success = step_cycle(state, pos_sf, dt)
     x_sf = np.zeros_like(x_h)
     y_sf = np.zeros_like(x_h)
+
+    if success==0:
+        output = [[10000, -10000]]
+        np.savetxt('out.txt',output, delimiter='  ')
+        if show_ani:
+            x_sk = x_h * (c_a1 + c_b1) + x_sf * (c_a2 + c_b2)
+            y_sk = y_h * (c_a1 + c_b1) + y_sf * (c_a2 + c_b2)
+            s = (c_a1 + c_b1) + (c_a2 + c_b2)
+            x_sk /= s
+            y_sk /= s
+            show_walking()
+        return
+
     # update initial condition
     q1 = (state[-1, 2] + state[-1, 4]) / 2
     q1d = (state[-1, 3] + state[-1, 5]) / 2
@@ -429,7 +450,7 @@ def robo(show_ani):
     # more steps...
     while step_idx<step_tt:
         # start another step
-        x_h_new, y_h_new, x_nsk_new, y_nsk_new, x_nsf_new, y_nsf_new, state = step_cycle(ini_state, pos_sf, dt)
+        x_h_new, y_h_new, x_nsk_new, y_nsk_new, x_nsf_new, y_nsf_new, state, success = step_cycle(ini_state, pos_sf, dt)
         x_sf_new = np.ones_like(x_h_new) * pos_sf[0]
         y_sf_new = np.ones_like(x_h_new) * pos_sf[1]
         # add trajectory of new step
@@ -456,7 +477,6 @@ def robo(show_ani):
     # f.close()
 
     if show_ani:
-        global x_sk, y_sk
         x_sk = x_h * (c_a1 + c_b1) + x_sf * (c_a2 + c_b2)
         y_sk = y_h * (c_a1 + c_b1) + y_sf * (c_a2 + c_b2)
         s =  (c_a1 + c_b1) +  (c_a2 + c_b2)
@@ -472,5 +492,5 @@ import math
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-# robo()
+robo(1)
 
