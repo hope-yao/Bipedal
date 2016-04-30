@@ -47,7 +47,10 @@ def three_linked_chain(state, t):
 
     qd = [q1d,q2d,q3d]
     rhs = -np.dot(B,qd) - G
-    sol = np.linalg.solve(H,rhs)
+    try:
+        sol = np.linalg.solve(H,rhs)
+    except:
+        print(H)
     xd = np.zeros_like(state)
     xd[0] = q1d
     xd[1] = sol[0]
@@ -176,7 +179,7 @@ def step_cycle(state,pos_sf,_time):
     num_time = 2
     dt = _time / num_time
     chain_num=3 # starts with three-chain state
-    while cnt<3/_time: # usually it takes less than three seconds for a step
+    while cnt<60/_time: # usually it takes less than sixteen seconds for a step
         # print('cnt: ',cnt)
         t = np.arange(0.0, _time, dt)
         if cnt==0:
@@ -345,11 +348,11 @@ def robo(show_ani):
     c_alpha = last[0] # defined by angle between two legs
     c_mh = last[1]  # mass of thigh
     c_mt = last[2]  # mass of shank
-    c_a1 = last[3]
-    c_b1 = last[4]
-    c_a2 = last[5]
-    c_ms = (1-c_mh-c_mt)
-    c_b2 = 1-c_a1-c_b1-c_a2
+    c_ms = last[3]
+    c_a1 = last[4]
+    c_b1 = last[5]
+    c_a2 = last[6]
+    c_b2 = last[7]
 
     global mh,mt,ms,a1,b1,a2,b2,_alpha,lt,ls,l
     M = 1# total weight
@@ -411,8 +414,14 @@ def robo(show_ani):
     # ini_state_deg = [(kk)*180/np.pi for kk in ini_state]
     diff = ini_state - state[-1]
     stability = np.linalg.norm(diff)
-    disp = cos(_gamma + np.pi/2 - q3)
-    output = [[stability, disp]]
+    v1 = [cos(_gamma),-sin(_gamma)]
+    v2 = [x_nsf[-1],y_nsf[-1]]
+    disp = np.dot(v1,v2)
+    if disp<0:
+        speed = 1000 * disp
+    else:
+        speed = disp*4
+    output = [[stability**2, speed]]
     np.savetxt('out.txt',output, delimiter='  ')
     # f.write(str(output))
     # f.write('\n')
@@ -439,7 +448,7 @@ def robo(show_ani):
         q2d = -state[-1, 1]
         q3 = -state[-1, 0]
         q3d = -state[-1, 1]
-        ini_state = [q1, 0, q2, 0, q3, 0]
+        ini_state = [q1, q1d, q2, q2d, q3, q3d]
         # update location
         pos_sf = [x_nsf[-1],y_nsf[-1]]
 
@@ -448,8 +457,11 @@ def robo(show_ani):
 
     if show_ani:
         global x_sk, y_sk
-        x_sk = x_sf * (c_a1 + c_b1) + x_h * (1 - c_a1 - c_b1)
-        y_sk = y_sf * (c_a1 + c_b1) + y_h * (1 - c_a1 - c_b1)
+        x_sk = x_h * (c_a1 + c_b1) + x_sf * (c_a2 + c_b2)
+        y_sk = y_h * (c_a1 + c_b1) + y_sf * (c_a2 + c_b2)
+        s =  (c_a1 + c_b1) +  (c_a2 + c_b2)
+        x_sk /= s
+        y_sk /= s
         show_walking()
 
 
