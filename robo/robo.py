@@ -191,26 +191,26 @@ def step_cycle(state,pos_sf,_time):
                 print(state)
                 print(lineno())
                 sys.exit("wrong in this step!")
-            # print('three linked chain, time: %s <<<' % (cnt*_time))
-            # print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
+            print('three linked chain, time: %s <<<' % (cnt*_time))
+            print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
             cnt += 1
             continue
         # knee strike
-        if  (np.max(-(state[-num_time:,2]))>(_alpha/2-_gamma)*0.9)\
+        if  ((state[-num_time:,2])>(state[-num_time:,0])).any()\
         and (chain_num==3) and (np.min(np.abs(state[-num_time:,2]-state[-num_time:,4]))<np.radians(1)):
             tmp = knee_strike(state[-1])
             state = np.insert(state, [len(state)], tmp, axis=0)
             chain_num = 2
-            # print('===============================================knee strike, time: %s' % (cnt*_time))
-            # print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
+            print('===============================================knee strike, time: %s' % (cnt*_time))
+            print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
             continue
         # heel strike
         if (chain_num==2) and (dist<0.01): # in degree
             tmp = heel_strike(state[-1])
             state = np.insert(state, [len(state)], tmp, axis=0)
             chain_num = 3
-            # print('===============================================heel strike, time: %s' % (cnt*_time))
-            # print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
+            print('===============================================heel strike, time: %s' % (cnt*_time))
+            print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
             print('end state: ',state[-1,:])
             break
         # three linked chain
@@ -218,8 +218,8 @@ def step_cycle(state,pos_sf,_time):
             try:
                 tmp = integrate.odeint(three_linked_chain, state[-1], t)
                 state = np.insert(tmp[1:len(tmp)+1],[0],state,axis=0)
-                # print('three linked chain, time: %s <<<' % (cnt*_time))
-                # print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
+                print('three linked chain, time: %s <<<' % (cnt*_time))
+                print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
                 chain_num = 3
                 cnt += 1
             except:
@@ -231,48 +231,46 @@ def step_cycle(state,pos_sf,_time):
             try:
                 tmp = integrate.odeint(two_linked_chain, state[-1], t)
                 state = np.insert(tmp[1:len(tmp)+1],[0],state,axis=0)
-                # print('two linked chain, time: %s <<<' % (cnt*_time))
-                # print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
+                print('two linked chain, time: %s <<<' % (cnt*_time))
+                print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
                 chain_num = 2
                 cnt += 1
             except:
                 print(state)
                 print(lineno())
                 sys.exit("wrong in this step!")
-        if cnt>3/_time: # usually it takes less than three seconds for a step
-            print("this is not a good step!")
-            success = 0
-            break
-
         q1 = tmp[:,0]
         q2 = tmp[:,2]
         q3 = tmp[:,4]
         x_h_tmp = -l*sin(q1)
         y_h_tmp = l*cos(q1)
-        x_nsk_tmp = x_h_tmp - lt*sin(q2)
-        y_nsk_tmp = y_h_tmp - lt*cos(q2)
-        x_nsf_tmp = x_nsk_tmp - ls*sin(q3)
-        y_nsf_tmp = y_nsk_tmp - ls*cos(q3)
+        x_nsk_tmp = x_h_tmp + lt*sin(-q2)
+        y_nsk_tmp = y_h_tmp + lt*cos(-q2)
+        x_nsf_tmp = x_nsk_tmp + ls*sin(-q3)
+        y_nsf_tmp = y_nsk_tmp + ls*cos(-q3)
 
-        v1 = [(x_nsf_tmp[i],y_nsf_tmp[i]) for i in range(num_time)]
-        v2 = [cos((_gamma)),-sin((_gamma))]
-        ab = np.dot(v1, v2)
         dist = 1000
-        for v in ab:
-            v3 = np.asarray(v1) - v*np.asarray(v2)
-            tmpdist = np.linalg.norm(v3)
-            dist = min(tmpdist,dist)
-        # print('dist: ',dist)
+        for i in range(len(x_nsf_tmp)):
+            v1 = [x_nsf_tmp[i], y_nsf_tmp[i]]
+            v2 = [sin((_gamma)), cos((_gamma))]
+            ab = np.dot(v1, v2)
+            dist = min(dist,ab)
+        print('dist: ',dist)
         # print('chain_num: ',chain_num)
+
+        if dist <-0.1 or cnt > 3 / _time:  # usually it takes less than three seconds for a step
+            print("this is not a good step!")
+            success = 0
+            break
 
     q1 = state[:,0]
     q2 = state[:,2]
     q3 = state[:,4]
     x_h = pos_sf[0] - l*sin(q1)
     y_h = pos_sf[1] + l*cos(q1)
-    x_nsk = x_h - lt*sin(q2)
+    x_nsk = x_h + lt*sin(q2)
     y_nsk = y_h - lt*cos(q2)
-    x_nsf = x_nsk - ls*sin(q3)
+    x_nsf = x_nsk + ls*sin(q3)
     y_nsf = y_nsk - ls*cos(q3)
 
     return x_h,y_h,x_nsk,y_nsk,x_nsf,y_nsf,state, success
@@ -378,14 +376,14 @@ def robo(show_ani):
 
     global g,dt
     g = 9.8  # acceleration due to gravity, in m/s^2
-    dt = 0.01 # time step of simulation
+    dt = 0.001 # time step of simulation
     step_idx = 1
     step_tt = 1
 
     # slop of terran
     global _gamma
-    _gamma = np.radians(9)
-
+    # _gamma = np.radians(9)
+    _gamma = 0.0504
 
     # initial states,
     q1 = _alpha/2 - _gamma
@@ -394,7 +392,8 @@ def robo(show_ani):
     q2d = 0.0
     q3 = q2
     q3d = 0.0
-    state = [q1, q1d, q2, q2d, q3, q3d]
+    # state = [q1, q1d, q2, q2d, q3, q3d]
+    state = [0.1877, -1.1014, -0.2884, -0.0399, -0.2884, -0.0399]
     pos_sf = [0,0]
 
     # f = open('out.txt', 'w')
@@ -409,6 +408,25 @@ def robo(show_ani):
     x_h, y_h, x_nsk, y_nsk, x_nsf, y_nsf,state, success = step_cycle(state, pos_sf, dt)
     x_sf = np.zeros_like(x_h)
     y_sf = np.zeros_like(x_h)
+
+    # plot hybrid trajectory in state space
+    pq1 = []
+    pq1d = []
+    pq2 = []
+    pq2d = []
+    pq3 = []
+    pq3d = []
+    for f in state:
+        pq1 += [f[0]]
+        pq1d += [f[1]]
+        pq2 += [f[2]]
+        pq2d += [f[3]]
+        pq3 += [f[4]]
+        pq3d += [f[5]]
+    plt.plot(pq1, pq1d)
+    plt.plot(pq2, pq2d)
+    plt.plot(pq3, pq3d)
+    plt.show()
 
     if success==0:
         output = [[10000, -10000]]
@@ -433,8 +451,8 @@ def robo(show_ani):
     # update location
     pos_sf = [x_nsf[-1], y_nsf[-1]]
     # ini_state_deg = [(kk)*180/np.pi for kk in ini_state]
-    diff = ini_state - state[-1]
-    stability = np.linalg.norm(diff)
+    diff = ini_state - state[0] # difference in starting state of two step cycle
+    stability = np.linalg.norm(diff) **2
     v1 = [cos(_gamma),-sin(_gamma)]
     v2 = [x_nsf[-1],y_nsf[-1]]
     disp = np.dot(v1,v2)
@@ -442,7 +460,7 @@ def robo(show_ani):
         speed = 1000 * disp
     else:
         speed = disp*4
-    output = [[stability**2, speed]]
+    output = [[stability, speed]]
     np.savetxt('out.txt',output, delimiter='  ')
     # f.write(str(output))
     # f.write('\n')

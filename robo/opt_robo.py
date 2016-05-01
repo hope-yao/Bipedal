@@ -29,27 +29,31 @@ c_a2 = 0.175
 c_b2 = 0.325
 leg_struc = np.array([c_alpha, c_mh, c_mt, c_ms, c_a1, c_b1, c_a2, c_b2])
 
-para_file = 'parameters.txt'
-np.savetxt(para_file, [leg_struc], delimiter='  ')
-robo.robo(1)
+# para_file = 'parameters.txt'
+# np.savetxt(para_file, [leg_struc], delimiter='  ')
+# robo.robo(1)
 
 def obj_fun(x,show_ani):
     print(">>>>>>>>>>>>>>>>>>>>>>>leg structure<<<<<<<<<<<<<<<<<<<<<<<<<<<")
     print(x)
     para_file = 'parameters.txt'
     np.savetxt(para_file, [x], delimiter='  ')
-    robo.robo(1)
+    robo.robo(show_ani)
     out_file = 'out.txt'
     obj_val = np.loadtxt(out_file, delimiter='  ')
     # minimize negative displacement
     paerto_obj = obj_val[0] * pareto_para[0] - obj_val[1]*pareto_para[1]
-    # obj with initial para: [1.540410383857885179e+01  4.429047069730471242e-01]
+    print('obj value:', obj_val)
+    # obj with initial para:
+    # 5.608666131881968830e+00  1.999756583080514405e+00
+    # 7.684611178255980057e-01  5.009724167888560675e-01
     return paerto_obj
 
 
 pareto_para = [[],[]]
 num_pareto_points = 2
 tt = [(i / (num_pareto_points+1)) for i in range(num_pareto_points+1)]
+tt.pop(0)
 tt.pop(0)
 for w in tt:
     pareto_para[0] = w / num_pareto_points
@@ -72,8 +76,7 @@ for w in tt:
          'jac': lambda x: np.array([0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0])}
     )
     para_bound = [(0.5,1.5),(0.4,0.6),(0.4,0.6),(0.02,0.2),(0.2,0.4),(0.1,0.2),(0.1,0.2),(0.2,0.4)]
-    res = minimize(obj_fun, leg_struc, args=0, method='L-BFGS-B', jac=None, bounds=para_bound, tol=1e-3, options={ 'maxiter':10, 'eps':1e-5, 'disp': False})
-    # res = minimize(obj_fun, leg_struc, args = 0, constraints=cons, method='SLSQP', jac=None, bounds=para_bound, tol=1e-3, options={'maxiter':1000, 'eps':1e-4, 'disp': True})
+    res = minimize(obj_fun, leg_struc, args=0, method='L-BFGS-B', jac=None, bounds=para_bound, tol=1e-3, options={ 'maxiter':3000, 'disp': False})
 
     # import barecmaes2 as cma
     # x = cma.fmin(obj_fun, leg_struc, 0.5, args=0)
@@ -84,8 +87,8 @@ for w in tt:
     result_para = np.loadtxt('out.txt', delimiter='  ')
     result = result_para + result_obj
     np.savetxt('result.txt', [result], delimiter='  ')
+    robo.robo(1)
 
 
 # fmin_l_bfgs_b(obj_fun, leg_struc, approx_grad=True, bounds=None, m=10, factr=10000000.0, pgtol=1e-05, epsilon=1e-08, iprint=-1, maxfun=15000, maxiter=15000, disp=None, callback=None, maxls=20)
 # os.system('python robo.py')
-robo.robo(1)
