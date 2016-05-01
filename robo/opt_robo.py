@@ -18,10 +18,7 @@ import robo
 
 
 c_alpha =  1 # defined by angle between two legs, times 20 in degree
-# constrain: c_mh>0.3 c_mt>0.1 c_mh+c_mt<1
-# c_mh = 0.47
-# c_mt = 0.47
-# c_ms = 0.06
+# constrain:
 q1 = 0.1877
 q2 = -0.2884
 q3 = -0.2884
@@ -29,11 +26,18 @@ c_a1 = 0.375
 c_b1 = 0.125
 c_a2 = 0.175
 c_b2 = 0.325
+# q1 = 0.15
+# q2 = -0.25
+# q3 = -0.25
+# c_a1 = 0.3
+# c_b1 = 0.2
+# c_a2 = 0.2
+# c_b2 = 0.3
 leg_struc = np.array([q1, q2, q3, c_a1, c_b1, c_a2, c_b2])
 
-# para_file = 'parameters.txt'
-# np.savetxt(para_file, [leg_struc], delimiter='  ')
-# robo.robo(1)
+para_file = 'parameters.txt'
+np.savetxt(para_file, [leg_struc], delimiter='  ')
+robo.robo(1)
 
 def obj_fun(x,show_ani):
     print(">>>>>>>>>>>>>>>>>>>>>>>leg structure<<<<<<<<<<<<<<<<<<<<<<<<<<<")
@@ -47,11 +51,20 @@ def obj_fun(x,show_ani):
     paerto_obj = obj_val[0] * pareto_para[0] - obj_val[1]*pareto_para[1]
     print('obj value:', obj_val)
     # obj with initial para:
+    # save for T-SNE
+    result_obj = np.loadtxt('out.txt', delimiter='  ')
+    result_para = np.loadtxt('parameters.txt', delimiter='  ')
+    result = result_para.tolist() + result_obj.tolist()
+    f = open('result.txt', 'a')
+    f.write(str(result)[1:-1])
+    f.write('\n')
+    f.close()
     return paerto_obj
 
 
+
 pareto_para = [[],[]]
-num_pareto_points = 2
+num_pareto_points = 20
 tt = [(i / (num_pareto_points+1)) for i in range(num_pareto_points+1)]
 tt.pop(0)
 tt.pop(0)
@@ -76,18 +89,19 @@ for w in tt:
          'jac': lambda x: np.array([0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0])}
     )
     para_bound = [(0.15,0.2),(-0.3,-0.2),(-0.3,-0.2),(0.2,0.4),(0.1,0.2),(0.1,0.2),(0.2,0.4)]
-    res = minimize(obj_fun, leg_struc, args=0, method='L-BFGS-B', jac=None, bounds=para_bound, tol=1e-3, options={ 'maxiter':1000, 'disp': False})
+    res = minimize(obj_fun, leg_struc, args=0, method='L-BFGS-B', jac=None, bounds=para_bound, tol=1e-4, options={ 'maxiter':1000, 'disp': False})
+
+    # f = open('bestresult.txt', 'a')
+    # f.write(str(result)[1:-1])
+    # f.write('\n')
+    # f.close()
 
     # import barecmaes2 as cma
     # x = cma.fmin(obj_fun, leg_struc, 0.5, args=0)
 
     print('optimization result:')
     print(res)
-    result_obj = np.loadtxt('out.txt', delimiter='  ')
-    result_para = np.loadtxt('out.txt', delimiter='  ')
-    result = result_para + result_obj
-    np.savetxt('result.txt', [result], delimiter='  ')
-    robo.robo(1)
+    # robo.robo(1)
 
 
 # fmin_l_bfgs_b(obj_fun, leg_struc, approx_grad=True, bounds=None, m=10, factr=10000000.0, pgtol=1e-05, epsilon=1e-08, iprint=-1, maxfun=15000, maxiter=15000, disp=None, callback=None, maxls=20)

@@ -202,16 +202,16 @@ def step_cycle(state,pos_sf,_time):
                 tmp = knee_strike(state[-1])
                 state = np.insert(state, [len(state)], tmp, axis=0)
                 chain_num = 2
-                # print('===============================================knee strike, time: %s' % (cnt*_time))
-                # print(state[-1])
+                print('===============================================knee strike, time: %s' % (cnt*_time))
+                print(state[-1])
                 continue
             # heel strike
             if (chain_num==2) and (dist<0.005): # in degree
                 tmp = heel_strike(state[-1])
                 state = np.insert(state, [len(state)], tmp, axis=0)
                 chain_num = 3
-                # print('===============================================heel strike, time: %s' % (cnt*_time))
-                # print(state[-1])
+                print('===============================================heel strike, time: %s' % (cnt*_time))
+                print(state[-1])
                 print('end state: ',state[-1,:])
                 break
             # three linked chain
@@ -261,8 +261,8 @@ def step_cycle(state,pos_sf,_time):
             v2 = [sin((_gamma)), cos((_gamma))]
             ab = np.dot(v1, v2)
             dist = min(dist,ab)
-        print('dist: ',dist)
-        print('chain_num: ',chain_num)
+        # print('dist: ',dist)
+        # print('chain_num: ',chain_num)
 
         if dist <-0.1 or cnt > 6 / _time:  # usually it takes less than three seconds for a step
             print("this is not a good step!")
@@ -345,6 +345,56 @@ def show_walking():
     plt.show()
     # ani.save('PDW.mp4', fps=15)
 
+
+
+def animate_orbit(i):
+    try:
+        orbit_q1 = orbit[0:i,0]
+        orbit_q1d = orbit[0:i,1]
+        orbit_q2 = orbit[0:i,2]
+        orbit_q2d = orbit[0:i,3]
+        orbit_q3 = orbit[0:i,4]
+        orbit_q3d = orbit[0:i,5]
+
+        xlist = [orbit_q1,orbit_q2,orbit_q3]
+        ylist = [orbit_q1d,orbit_q2d,orbit_q3d]
+
+        for lnum,line in enumerate(lines):
+            line.set_data(xlist[lnum], ylist[lnum]) # set data for each line separately.
+
+        time_text.set_text('time = %.3fs' % (i*dt))
+    except:
+        sys.exit("wrong in animating orbit!")
+
+    return tuple(lines) + (time_text,)
+
+def show_orbit():
+    fig = plt.figure()
+    ymin = min( [min(orbit[:,1]),min(orbit[:,3]),min(orbit[:,5])] )
+    ymax = max( [max(orbit[:,1]),max(orbit[:,3]),max(orbit[:,5])] )
+    xmin = min( [min(orbit[:,0]),min(orbit[:,2]),min(orbit[:,4])] )
+    xmax = max( [max(orbit[:,0]),max(orbit[:,2]),max(orbit[:,4])] )
+    ax1 = plt.axes(xlim=(xmin, xmax), ylim=(ymin, ymax))
+    ax1.grid(True)
+    plt.xlabel('angle')
+    plt.ylabel('angular velocity')
+
+    global lines, time_text
+    lines = []
+    lobj = ax1.plot([], [], lw=2, color="black")[0]
+    lines.append(lobj)
+    lobj = ax1.plot([], [], lw=2, color="red")[0]
+    lines.append(lobj)
+    lobj = ax1.plot([], [], lw=2, color="blue")[0]
+    lines.append(lobj)
+
+    time_text = ax1.text(0.05, 0.9, '', transform=ax1.transAxes)
+
+    ani = animation.FuncAnimation(fig, animate_orbit, np.arange(1, len(orbit)),
+                                  interval=10000 * dt, blit=True, init_func=init)
+    plt.show()
+
+
 def robo(show_ani):
     # Passive Dynamic Walking for bipedal robot
     # % reset
@@ -386,6 +436,8 @@ def robo(show_ani):
     dt = 0.001 # time step of simulation
     step_idx = 1
     step_tt = 1
+    if show_ani:
+        step_tt = 10
 
     # slop of terran
     global _gamma
@@ -408,6 +460,7 @@ def robo(show_ani):
 
     # start walking....
     x_h, y_h, x_nsk, y_nsk, x_nsf, y_nsf,state, success = step_cycle(state, pos_sf, dt)
+    step_time = len(x_h)
     x_sf = np.zeros_like(x_h)
     y_sf = np.zeros_like(x_h)
 
@@ -431,20 +484,20 @@ def robo(show_ani):
     q2d = state[-1, 1]
     q3 = state[-1, 0]
     q3d = state[-1, 1]
-    ini_state = [q1, q1d, q2, q2d, q3, q3d]
-    ini_state = [q1, state[0,1], q2, state[0,3], q3, state[0,5]]   ##############################ATTENTION HERE!
+    state[-1] = [q1, state[0,1], q2, state[0,3], q3, state[0,5]]   ##############################ATTENTION HERE!
+    ini_state = state[-1]
     # update location
     pos_sf = [x_nsf[-1], y_nsf[-1]]
     # ini_state_deg = [(kk)*180/np.pi for kk in ini_state]
     diff = ini_state - state[0] # difference in starting state of two step cycle
-    stability = np.linalg.norm(diff) **2
+    stability = np.linalg.norm(diff) **2 * 1000
     v1 = [cos(_gamma),-sin(_gamma)]
     v2 = [x_nsf[-1],y_nsf[-1]]
     disp = np.dot(v1,v2)
     if disp<0:
         speed = 1000 * disp
     else:
-        speed = disp*4
+        speed = disp
     output = [[stability, speed]]
     np.savetxt('out.txt',output, delimiter='  ')
     # f.write(str(output))
@@ -453,7 +506,7 @@ def robo(show_ani):
     # more steps...
     while step_idx<step_tt:
         # start another step
-        x_h_new, y_h_new, x_nsk_new, y_nsk_new, x_nsf_new, y_nsf_new, state, success = step_cycle(ini_state, pos_sf, dt)
+        x_h_new, y_h_new, x_nsk_new, y_nsk_new, x_nsf_new, y_nsf_new, state_new, success = step_cycle(ini_state, pos_sf, dt)
         x_sf_new = np.ones_like(x_h_new) * pos_sf[0]
         y_sf_new = np.ones_like(x_h_new) * pos_sf[1]
         # add trajectory of new step
@@ -465,6 +518,8 @@ def robo(show_ani):
         y_nsk = np.insert(y_nsk,[len(y_nsk)],y_nsk_new,axis=0)
         x_nsf = np.insert(x_nsf,[len(x_nsf)],x_nsf_new,axis=0)
         y_nsf = np.insert(y_nsf,[len(y_nsf)],y_nsf_new,axis=0)
+        y_nsf = np.insert(y_nsf,[len(y_nsf)],y_nsf_new,axis=0)
+        state = np.insert(state,[len(state)],state_new,axis=0)
         # update initial condition
         q1 = (state[-1, 2] + state[-1, 4]) / 2
         q1d = (state[-1, 3] + state[-1, 5]) / 2
@@ -472,7 +527,8 @@ def robo(show_ani):
         q2d = state[-1, 1]
         q3 = state[-1, 0]
         q3d = state[-1, 1]
-        ini_state = [q1, state[0, 1], q2, state[0, 3], q3, state[0, 5]]  ##############################ATTENTION HERE!
+        state[-1] = [q1, state[0, 1], q2, state[0, 3], q3, state[0, 5]]  ##############################ATTENTION HERE!
+        ini_state = state[-1]
         # update location
         pos_sf = [x_nsf[-1],y_nsf[-1]]
 
@@ -487,7 +543,16 @@ def robo(show_ani):
         pq2d = []
         pq3 = []
         pq3d = []
-        for f in state:
+        global orbit, orbit_q1, orbit_q2, orbit_q3, orbit_q1d, orbit_q2d, orbit_q3d
+        orbit_q1 = []
+        orbit_q2 = []
+        orbit_q3 = []
+        orbit_q1d = []
+        orbit_q2d = []
+        orbit_q3d = []
+        orbit = state
+        show_orbit()
+        for f in orbit:
             pq1 += [f[0]]
             pq1d += [f[1]]
             pq2 += [f[2]]
@@ -514,5 +579,5 @@ import math
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-# robo(1)
+robo(1)
 
