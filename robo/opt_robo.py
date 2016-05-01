@@ -19,15 +19,17 @@ import robo
 
 c_alpha =  1 # defined by angle between two legs, times 20 in degree
 # constrain: c_mh>0.3 c_mt>0.1 c_mh+c_mt<1
-c_mh = 0.47
-c_mt = 0.47
-c_ms = 0.06
-
+# c_mh = 0.47
+# c_mt = 0.47
+# c_ms = 0.06
+q1 = 0.1877
+q2 = -0.2884
+q3 = -0.2884
 c_a1 = 0.375
 c_b1 = 0.125
 c_a2 = 0.175
 c_b2 = 0.325
-leg_struc = np.array([c_alpha, c_mh, c_mt, c_ms, c_a1, c_b1, c_a2, c_b2])
+leg_struc = np.array([q1, q2, q3, c_a1, c_b1, c_a2, c_b2])
 
 # para_file = 'parameters.txt'
 # np.savetxt(para_file, [leg_struc], delimiter='  ')
@@ -45,8 +47,6 @@ def obj_fun(x,show_ani):
     paerto_obj = obj_val[0] * pareto_para[0] - obj_val[1]*pareto_para[1]
     print('obj value:', obj_val)
     # obj with initial para:
-    # 5.608666131881968830e+00  1.999756583080514405e+00
-    # 7.684611178255980057e-01  5.009724167888560675e-01
     return paerto_obj
 
 
@@ -61,22 +61,22 @@ for w in tt:
 
     cons = (
         # total weight in range[0.8,1.0]
-        {'type': 'ineq',
-         'fun': lambda x: np.array([1 - (x[1] + x[2] + x[3])]),
-         'jac': lambda x: np.array([-1.0, -1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0])},
-        {'type': 'ineq',
-         'fun': lambda x: np.array([-0.8 + (x[1] + x[2] + x[3])]),
-         'jac': lambda x: np.array([1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0])},
+        # {'type': 'ineq',
+        #  'fun': lambda x: np.array([1 - (x[1] + x[2] + x[3])]),
+        #  'jac': lambda x: np.array([-1.0, -1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0])},
+        # {'type': 'ineq',
+        #  'fun': lambda x: np.array([-0.8 + (x[1] + x[2] + x[3])]),
+        #  'jac': lambda x: np.array([1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0])},
         # total hight in range(0.9,1)
         {'type': 'ineq',
          'fun': lambda x: np.array([1 + (x[4] + x[5] + x[6] + x[7])]),
-         'jac': lambda x: np.array([0.0, 0.0, 0.0, 0.0, -1.0, -1.0, -1.0, -1.0])},
+         'jac': lambda x: np.array([0.0, 0.0, 0.0, -1.0, -1.0, -1.0, -1.0])},
         {'type': 'ineq',
          'fun': lambda x: np.array([-0.9 + (x[4] + x[5] + x[6] + x[7])]),
-         'jac': lambda x: np.array([0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0])}
+         'jac': lambda x: np.array([0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0])}
     )
-    para_bound = [(0.5,1.5),(0.4,0.6),(0.4,0.6),(0.02,0.2),(0.2,0.4),(0.1,0.2),(0.1,0.2),(0.2,0.4)]
-    res = minimize(obj_fun, leg_struc, args=0, method='L-BFGS-B', jac=None, bounds=para_bound, tol=1e-3, options={ 'maxiter':3000, 'disp': False})
+    para_bound = [(0.15,0.2),(-0.3,-0.2),(-0.3,-0.2),(0.2,0.4),(0.1,0.2),(0.1,0.2),(0.2,0.4)]
+    res = minimize(obj_fun, leg_struc, args=0, method='L-BFGS-B', jac=None, bounds=para_bound, tol=1e-3, options={ 'maxiter':1000, 'disp': False})
 
     # import barecmaes2 as cma
     # x = cma.fmin(obj_fun, leg_struc, 0.5, args=0)

@@ -181,64 +181,70 @@ def step_cycle(state,pos_sf,_time):
     chain_num=3 # starts with three-chain state
     success = 1
     while True:
-        # print('cnt: ',cnt)
-        t = np.arange(0.0, _time, dt)
-        if cnt==0:
-            try:
-                tmp = integrate.odeint(three_linked_chain, state, t)
-                state = np.insert(tmp[1:len(tmp)+1],[0],state,axis=0)
-            except:
-                print(state)
-                print(lineno())
-                sys.exit("wrong in this step!")
-            # print('three linked chain, time: %s <<<' % (cnt*_time))
-            # print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
-            cnt += 1
-            continue
-        # knee strike
-        if  ((state[-num_time:,2])>(state[-num_time:,0])).any()\
-        and (chain_num==3) and (np.min(np.abs(state[-num_time:,2]-state[-num_time:,4]))<np.radians(1)):
-            tmp = knee_strike(state[-1])
-            state = np.insert(state, [len(state)], tmp, axis=0)
-            chain_num = 2
-            print('===============================================knee strike, time: %s' % (cnt*_time))
-            print(state[-1])
-            continue
-        # heel strike
-        if (chain_num==2) and (dist<0.005): # in degree
-            tmp = heel_strike(state[-1])
-            state = np.insert(state, [len(state)], tmp, axis=0)
-            chain_num = 3
-            print('===============================================heel strike, time: %s' % (cnt*_time))
-            print(state[-1])
-            print('end state: ',state[-1,:])
-            break
-        # three linked chain
-        if (chain_num==3):
-            try:
-                tmp = integrate.odeint(three_linked_chain, state[-1], t)
-                state = np.insert(tmp[1:len(tmp)+1],[0],state,axis=0)
-                print('three linked chain, time: %s <<<' % (cnt*_time))
-                print(state[-1])
-                chain_num = 3
+        try:
+            # print('cnt: ',cnt)
+            t = np.arange(0.0, _time, dt)
+            if cnt==0:
+                try:
+                    tmp = integrate.odeint(three_linked_chain, state, t)
+                    state = np.insert(tmp[1:len(tmp)+1],[0],state,axis=0)
+                except:
+                    print(state)
+                    print(lineno())
+                    sys.exit("wrong in this step!")
+                # print('three linked chain, time: %s <<<' % (cnt*_time))
+                # print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
                 cnt += 1
-            except:
-                print(state)
-                print(lineno())
-                sys.exit("wrong in this step!")
-        # two linked chain
-        if (chain_num==2):
-            try:
-                tmp = integrate.odeint(two_linked_chain, state[-1], t)
-                state = np.insert(tmp[1:len(tmp)+1],[0],state,axis=0)
-                print('two linked chain, time: %s <<<' % (cnt*_time))
-                print(state[-1])
+                continue
+            # knee strike
+            if  ((state[-num_time:,2])>(state[-num_time:,0])).any()\
+            and (chain_num==3) and (np.min(np.abs(state[-num_time:,2]-state[-num_time:,4]))<np.radians(1)):
+                tmp = knee_strike(state[-1])
+                state = np.insert(state, [len(state)], tmp, axis=0)
                 chain_num = 2
-                cnt += 1
-            except:
-                print(state)
-                print(lineno())
-                sys.exit("wrong in this step!")
+                # print('===============================================knee strike, time: %s' % (cnt*_time))
+                # print(state[-1])
+                continue
+            # heel strike
+            if (chain_num==2) and (dist<0.005): # in degree
+                tmp = heel_strike(state[-1])
+                state = np.insert(state, [len(state)], tmp, axis=0)
+                chain_num = 3
+                # print('===============================================heel strike, time: %s' % (cnt*_time))
+                # print(state[-1])
+                print('end state: ',state[-1,:])
+                break
+            # three linked chain
+            if (chain_num==3):
+                try:
+                    tmp = integrate.odeint(three_linked_chain, state[-1], t)
+                    state = np.insert(tmp[1:len(tmp)+1],[0],state,axis=0)
+                    # print('three linked chain, time: %s <<<' % (cnt*_time))
+                    # print(state[-1])
+                    chain_num = 3
+                    cnt += 1
+                except:
+                    print(state)
+                    print(lineno())
+                    sys.exit("wrong in this step!")
+            # two linked chain
+            if (chain_num==2):
+                try:
+                    tmp = integrate.odeint(two_linked_chain, state[-1], t)
+                    state = np.insert(tmp[1:len(tmp)+1],[0],state,axis=0)
+                    # print('two linked chain, time: %s <<<' % (cnt*_time))
+                    # print(state[-1])
+                    chain_num = 2
+                    cnt += 1
+                except:
+                    print(state)
+                    print(lineno())
+                    sys.exit("wrong in this step!")
+        except:
+            print("this is not a good step!")
+            success = 0
+            break
+
         q1 = tmp[:,0]
         q2 = tmp[:,2]
         q3 = tmp[:,4]
@@ -350,16 +356,18 @@ def robo(show_ani):
         last = paras[-1,:]
     except:
         last = paras
-    c_alpha = last[0] # defined by angle between two legs
-    c_mh = last[1]  # mass of thigh
-    c_mt = last[2]  # mass of shank
-    c_ms = last[3]
-    c_a1 = last[4]
-    c_b1 = last[5]
-    c_a2 = last[6]
-    c_b2 = last[7]
+    q1 = last[0]
+    q2 = last[1]
+    q3 = last[2]
+    c_mh = 0.47
+    c_mt = 0.47
+    c_ms = 0.06
+    c_a1 = last[3]
+    c_b1 = last[4]
+    c_a2 = last[5]
+    c_b2 = last[6]
 
-    global mh,mt,ms,a1,b1,a2,b2,_alpha,lt,ls,l
+    global mh,mt,ms,a1,b1,a2,b2,lt,ls,l
     M = 1# total weight
     L = 1 # total lenth
     mh = M * c_mh   #mass of hip
@@ -369,7 +377,6 @@ def robo(show_ani):
     b1 = L * c_b1
     a2 = L * c_a2
     b2 = L * c_b2
-    _alpha  = np.radians(c_alpha * 20)
     lt = a2 + b2  # length of thigh
     ls = a1 + b1  # length of shank
     l = lt + ls
@@ -378,22 +385,17 @@ def robo(show_ani):
     g = 9.8  # acceleration due to gravity, in m/s^2
     dt = 0.001 # time step of simulation
     step_idx = 1
-    step_tt = 3
+    step_tt = 1
 
     # slop of terran
     global _gamma
     # _gamma = np.radians(9)
     _gamma = 0.0504
 
-    # initial states,
-    q1 = _alpha/2 - _gamma
-    q1d = 0.0
-    q2 = _alpha/2 + _gamma
-    q2d = 0.0
-    q3 = q2
-    q3d = 0.0
+
     # state = [q1, q1d, q2, q2d, q3, q3d]
-    state = [0.1877, -1.1014, -0.2884, -0.0399, -0.2884, -0.0399]
+    # state = [0.1877, -1.1014, -0.2884, -0.0399, -0.2884, -0.0399]
+    state = [q1, -1.1014, q2, -0.0399, q3, -0.0399]
     pos_sf = [0,0]
 
     # f = open('out.txt', 'w')
@@ -466,10 +468,10 @@ def robo(show_ani):
         # update initial condition
         q1 = (state[-1, 2] + state[-1, 4]) / 2
         q1d = (state[-1, 3] + state[-1, 5]) / 2
-        q2 = -state[-1, 0]
-        q2d = -state[-1, 1]
-        q3 = -state[-1, 0]
-        q3d = -state[-1, 1]
+        q2 = state[-1, 0]
+        q2d = state[-1, 1]
+        q3 = state[-1, 0]
+        q3d = state[-1, 1]
         ini_state = [q1, state[0, 1], q2, state[0, 3], q3, state[0, 5]]  ##############################ATTENTION HERE!
         # update location
         pos_sf = [x_nsf[-1],y_nsf[-1]]
@@ -512,5 +514,5 @@ import math
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-robo(1)
+# robo(1)
 
