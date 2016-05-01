@@ -162,11 +162,11 @@ def heel_strike(state):
 
     xd = np.zeros_like(state)
     xd[0] = state[0]
-    xd[1] = sol[0]
     xd[2] = state[2]
+    xd[4] = state[2]
+    xd[1] = sol[0]
     xd[3] = sol[1]
-    xd[4] = state[4]
-    xd[5] = sol[1]  # q3d = q2d, thigh and shank binded
+    xd[5] = sol[1]
 
     return xd
 
@@ -191,8 +191,8 @@ def step_cycle(state,pos_sf,_time):
                 print(state)
                 print(lineno())
                 sys.exit("wrong in this step!")
-            print('three linked chain, time: %s <<<' % (cnt*_time))
-            print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
+            # print('three linked chain, time: %s <<<' % (cnt*_time))
+            # print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
             cnt += 1
             continue
         # knee strike
@@ -202,15 +202,15 @@ def step_cycle(state,pos_sf,_time):
             state = np.insert(state, [len(state)], tmp, axis=0)
             chain_num = 2
             print('===============================================knee strike, time: %s' % (cnt*_time))
-            print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
+            print(state[-1])
             continue
         # heel strike
-        if (chain_num==2) and (dist<0.01): # in degree
+        if (chain_num==2) and (dist<0.005): # in degree
             tmp = heel_strike(state[-1])
             state = np.insert(state, [len(state)], tmp, axis=0)
             chain_num = 3
             print('===============================================heel strike, time: %s' % (cnt*_time))
-            print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
+            print(state[-1])
             print('end state: ',state[-1,:])
             break
         # three linked chain
@@ -219,7 +219,7 @@ def step_cycle(state,pos_sf,_time):
                 tmp = integrate.odeint(three_linked_chain, state[-1], t)
                 state = np.insert(tmp[1:len(tmp)+1],[0],state,axis=0)
                 print('three linked chain, time: %s <<<' % (cnt*_time))
-                print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
+                print(state[-1])
                 chain_num = 3
                 cnt += 1
             except:
@@ -232,7 +232,7 @@ def step_cycle(state,pos_sf,_time):
                 tmp = integrate.odeint(two_linked_chain, state[-1], t)
                 state = np.insert(tmp[1:len(tmp)+1],[0],state,axis=0)
                 print('two linked chain, time: %s <<<' % (cnt*_time))
-                print(np.degrees([state[-1,0],state[-1,2],state[-1,4]]))
+                print(state[-1])
                 chain_num = 2
                 cnt += 1
             except:
@@ -244,10 +244,10 @@ def step_cycle(state,pos_sf,_time):
         q3 = tmp[:,4]
         x_h_tmp = -l*sin(q1)
         y_h_tmp = l*cos(q1)
-        x_nsk_tmp = x_h_tmp + lt*sin(-q2)
-        y_nsk_tmp = y_h_tmp + lt*cos(-q2)
-        x_nsf_tmp = x_nsk_tmp + ls*sin(-q3)
-        y_nsf_tmp = y_nsk_tmp + ls*cos(-q3)
+        x_nsk_tmp = x_h_tmp + lt*sin(q2)
+        y_nsk_tmp = y_h_tmp - lt*cos(q2)
+        x_nsf_tmp = x_nsk_tmp + ls*sin(q3)
+        y_nsf_tmp = y_nsk_tmp - ls*cos(q3)
 
         dist = 1000
         for i in range(len(x_nsf_tmp)):
@@ -256,9 +256,9 @@ def step_cycle(state,pos_sf,_time):
             ab = np.dot(v1, v2)
             dist = min(dist,ab)
         print('dist: ',dist)
-        # print('chain_num: ',chain_num)
+        print('chain_num: ',chain_num)
 
-        if dist <-0.1 or cnt > 3 / _time:  # usually it takes less than three seconds for a step
+        if dist <-0.1 or cnt > 6 / _time:  # usually it takes less than three seconds for a step
             print("this is not a good step!")
             success = 0
             break
@@ -378,7 +378,7 @@ def robo(show_ani):
     g = 9.8  # acceleration due to gravity, in m/s^2
     dt = 0.001 # time step of simulation
     step_idx = 1
-    step_tt = 1
+    step_tt = 3
 
     # slop of terran
     global _gamma
@@ -409,24 +409,6 @@ def robo(show_ani):
     x_sf = np.zeros_like(x_h)
     y_sf = np.zeros_like(x_h)
 
-    # plot hybrid trajectory in state space
-    pq1 = []
-    pq1d = []
-    pq2 = []
-    pq2d = []
-    pq3 = []
-    pq3d = []
-    for f in state:
-        pq1 += [f[0]]
-        pq1d += [f[1]]
-        pq2 += [f[2]]
-        pq2d += [f[3]]
-        pq3 += [f[4]]
-        pq3d += [f[5]]
-    plt.plot(pq1, pq1d)
-    plt.plot(pq2, pq2d)
-    plt.plot(pq3, pq3d)
-    plt.show()
 
     if success==0:
         output = [[10000, -10000]]
@@ -443,11 +425,12 @@ def robo(show_ani):
     # update initial condition
     q1 = (state[-1, 2] + state[-1, 4]) / 2
     q1d = (state[-1, 3] + state[-1, 5]) / 2
-    q2 = -state[-1, 0]
-    q2d = -state[-1, 1]
-    q3 = -state[-1, 0]
-    q3d = -state[-1, 1]
+    q2 = state[-1, 0]
+    q2d = state[-1, 1]
+    q3 = state[-1, 0]
+    q3d = state[-1, 1]
     ini_state = [q1, q1d, q2, q2d, q3, q3d]
+    ini_state = [q1, state[0,1], q2, state[0,3], q3, state[0,5]]   ##############################ATTENTION HERE!
     # update location
     pos_sf = [x_nsf[-1], y_nsf[-1]]
     # ini_state_deg = [(kk)*180/np.pi for kk in ini_state]
@@ -487,7 +470,7 @@ def robo(show_ani):
         q2d = -state[-1, 1]
         q3 = -state[-1, 0]
         q3d = -state[-1, 1]
-        ini_state = [q1, q1d, q2, q2d, q3, q3d]
+        ini_state = [q1, state[0, 1], q2, state[0, 3], q3, state[0, 5]]  ##############################ATTENTION HERE!
         # update location
         pos_sf = [x_nsf[-1],y_nsf[-1]]
 
@@ -495,6 +478,25 @@ def robo(show_ani):
     # f.close()
 
     if show_ani:
+        # plot hybrid trajectory in state space
+        pq1 = []
+        pq1d = []
+        pq2 = []
+        pq2d = []
+        pq3 = []
+        pq3d = []
+        for f in state:
+            pq1 += [f[0]]
+            pq1d += [f[1]]
+            pq2 += [f[2]]
+            pq2d += [f[3]]
+            pq3 += [f[4]]
+            pq3d += [f[5]]
+        plt.plot(pq1, pq1d)
+        plt.plot(pq2, pq2d)
+        plt.plot(pq3, pq3d)
+        plt.show()
+        # animation
         x_sk = x_h * (c_a1 + c_b1) + x_sf * (c_a2 + c_b2)
         y_sk = y_h * (c_a1 + c_b1) + y_sf * (c_a2 + c_b2)
         s =  (c_a1 + c_b1) +  (c_a2 + c_b2)
