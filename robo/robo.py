@@ -309,96 +309,39 @@ def animate(i):
 
     time_text.set_text('time = %.3fs' % (i*dt))
 
-    return tuple(lines) + (time_text,)
+    # return tuple(lines) + (time_text,)
 
-
-def show_walking():
-
-    # following code are for animation
-
-    # slop
-    global x_slop_low,x_slop_up,y_slop_low,y_slop_up
-    x_slop_low = 2 * cos((_gamma))
-    x_slop_up = -x_slop_low
-    y_slop_low = -2 * sin((_gamma))
-    y_slop_up = -y_slop_low
-
-    print('start animation...')
-
-    fig = plt.figure()
-    ax1 = plt.axes(xlim=(-2, 2), ylim=(-2, 2))
-    ax1.grid(True)
-    plt.xlabel('Longitude')
-    plt.ylabel('Latitude')
-
-    global lines, time_text
-    lines = []
-    lobj = ax1.plot([], [], 'o-', lw=2, color="black")[0]
-    lines.append(lobj)
-    lobj = ax1.plot([], [], lw=2, color="red")[0]
-    lines.append(lobj)
-
-    time_text = ax1.text(0.05, 0.9, '', transform=ax1.transAxes)
-
-    ani = animation.FuncAnimation(fig, animate, np.arange(1, len(x_h)),
-                                  interval=1000 * dt, blit=True, init_func=init)
-    plt.show()
-    # ani.save('PDW.mp4', fps=15)
-
-
-
-def animate_orbit(i):
     try:
-        orbit_q1 = orbit[0:i,0]
-        orbit_q1d = orbit[0:i,1]
-        orbit_q2 = orbit[0:i,2]
-        orbit_q2d = orbit[0:i,3]
-        orbit_q3 = orbit[0:i,4]
-        orbit_q3d = orbit[0:i,5]
+        orbit_q1 = orbit[0:i, 0]
+        orbit_q1d = orbit[0:i, 1]
+        orbit_q2 = orbit[0:i, 2]
+        orbit_q2d = orbit[0:i, 3]
+        orbit_q3 = orbit[0:i, 4]
+        orbit_q3d = orbit[0:i, 5]
 
-        xlist = [orbit_q1,orbit_q2,orbit_q3]
-        ylist = [orbit_q1d,orbit_q2d,orbit_q3d]
+        xlist = [orbit_q1, orbit_q2, orbit_q3]
+        ylist = [orbit_q1d, orbit_q2d, orbit_q3d]
 
-        for lnum,line in enumerate(lines):
-            line.set_data(xlist[lnum], ylist[lnum]) # set data for each line separately.
+        for lnum, line in enumerate(lines_obt):
+            line.set_data(xlist[lnum], ylist[lnum])  # set data for each line separately.
 
-        time_text.set_text('time = %.3fs' % (i*dt))
+        time_text_obt.set_text('time = %.3fs' % (i * dt))
     except:
         sys.exit("wrong in animating orbit!")
 
-    return tuple(lines) + (time_text,)
+    return tuple(lines_obt) + tuple(lines) + (time_text_obt,) + (time_text,)
 
-def show_orbit():
-    fig = plt.figure()
-    ymin = min( [min(orbit[:,1]),min(orbit[:,3]),min(orbit[:,5])] )
-    ymax = max( [max(orbit[:,1]),max(orbit[:,3]),max(orbit[:,5])] )
-    xmin = min( [min(orbit[:,0]),min(orbit[:,2]),min(orbit[:,4])] )
-    xmax = max( [max(orbit[:,0]),max(orbit[:,2]),max(orbit[:,4])] )
-    ax1 = plt.axes(xlim=(xmin, xmax), ylim=(ymin, ymax))
-    ax1.grid(True)
-    plt.xlabel('angle')
-    plt.ylabel('angular velocity')
 
-    global lines, time_text
-    lines = []
-    lobj = ax1.plot([], [], lw=2, color="black")[0]
-    lines.append(lobj)
-    lobj = ax1.plot([], [], lw=2, color="red")[0]
-    lines.append(lobj)
-    lobj = ax1.plot([], [], lw=2, color="blue")[0]
-    lines.append(lobj)
-
-    time_text = ax1.text(0.05, 0.9, '', transform=ax1.transAxes)
-
-    ani = animation.FuncAnimation(fig, animate_orbit, np.arange(1, len(orbit)),
-                                  interval=10000 * dt, blit=True, init_func=init)
-    plt.show()
+def init_obt():
+    for line in lines_obt:
+        line.set_data([],[])
+    time_text_obt.set_text('')
+    return tuple(lines_obt) + (time_text_obt,)
 
 
 def robo(show_ani):
     # Passive Dynamic Walking for bipedal robot
     # % reset
-
 
     # parameters of leg structure
     paras = np.loadtxt('parameters.txt', delimiter='  ')
@@ -437,23 +380,18 @@ def robo(show_ani):
     step_idx = 1
     step_tt = 1
     if show_ani:
-        step_tt = 10
+        step_tt = 3
 
     # slop of terran
     global _gamma
-    # _gamma = np.radians(9)
-    _gamma = 0.0504
+    # _gamma = 0.0504
+    _gamma = 0.0904
 
 
-    # state = [q1, q1d, q2, q2d, q3, q3d]
     # state = [0.1877, -1.1014, -0.2884, -0.0399, -0.2884, -0.0399]
     state = [q1, -1.1014, q2, -0.0399, q3, -0.0399]
     pos_sf = [0,0]
 
-    # f = open('out.txt', 'w')
-    # output = np.degrees(state).tolist()
-    # f.write(str(output))
-    # f.write('\n')
 
     global x_sf,y_sf,x_h,y_h,x_nsk,y_nsk,x_nsf,y_nsf
     global x_sk, y_sk
@@ -468,13 +406,6 @@ def robo(show_ani):
     if success==0:
         output = [[10000, -10000]]
         np.savetxt('out.txt',output, delimiter='  ')
-        if show_ani:
-            x_sk = x_h * (c_a1 + c_b1) + x_sf * (c_a2 + c_b2)
-            y_sk = y_h * (c_a1 + c_b1) + y_sf * (c_a2 + c_b2)
-            s = (c_a1 + c_b1) + (c_a2 + c_b2)
-            x_sk /= s
-            y_sk /= s
-            show_walking()
         return
 
     # update initial condition
@@ -488,7 +419,7 @@ def robo(show_ani):
     ini_state = state[-1]
     # update location
     pos_sf = [x_nsf[-1], y_nsf[-1]]
-    # ini_state_deg = [(kk)*180/np.pi for kk in ini_state]
+
     diff = ini_state - state[0] # difference in starting state of two step cycle
     stability = np.linalg.norm(diff) **2 * 1000
     v1 = [cos(_gamma),-sin(_gamma)]
@@ -500,8 +431,6 @@ def robo(show_ani):
         speed = disp
     output = [[stability, speed]]
     np.savetxt('out.txt',output, delimiter='  ')
-    # f.write(str(output))
-    # f.write('\n')
 
     # more steps...
     while step_idx<step_tt:
@@ -531,18 +460,14 @@ def robo(show_ani):
         ini_state = state[-1]
         # update location
         pos_sf = [x_nsf[-1],y_nsf[-1]]
-
         step_idx += 1
-    # f.close()
 
     if show_ani:
+        print('start animation...')
+
+        global fig, ax1, ax2
+        fig, (ax1,ax2) = plt.subplots(2,1)
         # plot hybrid trajectory in state space
-        pq1 = []
-        pq1d = []
-        pq2 = []
-        pq2d = []
-        pq3 = []
-        pq3d = []
         global orbit, orbit_q1, orbit_q2, orbit_q3, orbit_q1d, orbit_q2d, orbit_q3d
         orbit_q1 = []
         orbit_q2 = []
@@ -551,26 +476,68 @@ def robo(show_ani):
         orbit_q2d = []
         orbit_q3d = []
         orbit = state
-        show_orbit()
-        for f in orbit:
-            pq1 += [f[0]]
-            pq1d += [f[1]]
-            pq2 += [f[2]]
-            pq2d += [f[3]]
-            pq3 += [f[4]]
-            pq3d += [f[5]]
-        plt.plot(pq1, pq1d)
-        plt.plot(pq2, pq2d)
-        plt.plot(pq3, pq3d)
-        plt.show()
-        # animation
+
+        ymin = min([min(orbit[:, 1]), min(orbit[:, 3]), min(orbit[:, 5])])
+        ymax = max([max(orbit[:, 1]), max(orbit[:, 3]), max(orbit[:, 5])])
+        xmin = min([min(orbit[:, 0]), min(orbit[:, 2]), min(orbit[:, 4])])
+        xmax = max([max(orbit[:, 0]), max(orbit[:, 2]), max(orbit[:, 4])])
+        ax1.set_xlim([xmin, xmax])
+        ax1.set_ylim([ymin, ymax])
+        ax1.grid(True)
+        ax1.set_xlabel('angle')
+        ax1.set_ylabel('angular velocity')
+
+        global lines_obt, time_text_obt
+        lines_obt = []
+        lobj = ax1.plot([], [], lw=2, color="black")[0]
+        lines_obt.append(lobj)
+        lobj = ax1.plot([], [], lw=2, color="red")[0]
+        lines_obt.append(lobj)
+        lobj = ax1.plot([], [], lw=2, color="blue")[0]
+        lines_obt.append(lobj)
+
+        time_text_obt = ax1.text(0.05, 0.9, '', transform=ax1.transAxes)
+
+
         x_sk = x_h * (c_a1 + c_b1) + x_sf * (c_a2 + c_b2)
         y_sk = y_h * (c_a1 + c_b1) + y_sf * (c_a2 + c_b2)
         s =  (c_a1 + c_b1) +  (c_a2 + c_b2)
         x_sk /= s
         y_sk /= s
-        show_walking()
+        # slop
+        global x_slop_low, x_slop_up, y_slop_low, y_slop_up
+        x_slop_low = 2 * cos((_gamma))
+        x_slop_up = -x_slop_low
+        y_slop_low = -2 * sin((_gamma))
+        y_slop_up = -y_slop_low
 
+
+        ax2.set_xlim([-2, 2])
+        ax2.set_ylim([-2, 2])
+        ax2.grid(True)
+        ax1.set_xlabel('Longitude')
+        ax1.set_ylabel('Latitude')
+
+        global lines, time_text
+        lines = []
+        lobj = ax2.plot([], [], 'o-', lw=2, color="black")[0]
+        lines.append(lobj)
+        lobj = ax2.plot([], [], lw=2, color="red")[0]
+        lines.append(lobj)
+
+        time_text = ax2.text(0.05, 0.9, '', transform=ax2.transAxes)
+
+        ani = animation.FuncAnimation(fig, animate, np.arange(1, len(x_h)),
+                                      interval=100 * dt, blit=True, init_func=init)
+
+        plt.show()
+        print('end animation...')
+        # Set up formatting for the movie files
+        print('saving animation...')
+        Writer = animation.writers['ffmpeg']
+        writer = Writer(fps=15, metadata=dict(artist='Me'), bitrate=1800)
+        ani.save('PDW.mp4', writer=writer)
+        print('animation saved')
 
 from numpy import sin, cos
 import numpy as np
