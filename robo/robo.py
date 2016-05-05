@@ -3,8 +3,8 @@ def lineno():
     """Returns the current line number in our program."""
     return inspect.currentframe().f_back.f_lineno
 
-'''
-def three_linked_chain(t, x, xdot):
+
+def three_linked_chain_rt(t, x, xdot):
     state = x
     q1 = state[0]
     q1d = state[1]
@@ -28,7 +28,7 @@ def three_linked_chain(t, x, xdot):
     h122 = -(mt*b2+ms*lt) * l * sin(q1-q2)
     h133 = -ms*b1*l * sin(q1-q3)
     h211 = -h122
-    h233 = ms*lt*b1 * sin(q3-q2)
+    h233 = -ms*lt*b1 * sin(q3-q2)
     h311 = -h133
     h322 = -h233
     B[0,0] = 0
@@ -65,7 +65,7 @@ def root_ks(t, y, out):
     """ root function to check the object reached height Y1 """
     out[0] = y[2] - y[4]
     return 0
-
+'''
 def rhseqn(t, x, xdot):
     """ we create rhs equations for the problem"""
     xdot[0] = x[1]
@@ -127,11 +127,12 @@ def three_linked_chain(state, t):
     H[2,1] = H[1,2]
     H[2,2] = ms*b1**2
 
+    '''equations from MIT thesis WRONG IN SIGN OF h233!'''
     B = np.zeros((3,3))
     h122 = -(mt*b2+ms*lt) * l * sin(q1-q2)
     h133 = -ms*b1*l * sin(q1-q3)
     h211 = -h122
-    h233 = ms*lt*b1 * sin(q3-q2)
+    h233 = -ms*lt*b1 * sin(q3-q2)
     h311 = -h133
     h322 = -h233
     B[0,0] = 0
@@ -203,23 +204,38 @@ def knee_strike(state):
     q2 = state[2]
     q3 = state[4]
 
-    alpha = cos(q1-q2)
-    beta = cos(q1-q3)
-    gamma = cos(q2-q3)
+    '''using equations from MIT thesis, WRONG!'''
+    # alpha = cos(q1-q2)
+    # beta = cos(q1-q3)
+    # gamma = cos(q2-q3)
+    #
+    # Q_r = np.zeros((2,3))
+    # Q_r[0,0] = -(ms*lt+mt*b2)*l*cos(alpha) - ms*b1*l*cos(beta) + (mt+ms+mh)*l**2 + ms*a1**2 + mt*(ls+a2)**2
+    # Q_r[0,1] = -(ms*lt+mt*b2)*l*cos(alpha) + ms*b1*lt*cos(gamma) + mt*b2**2 + ms*lt**2
+    # Q_r[0,2] = -ms*b1*l*cos(beta) + ms*b1*lt*cos(gamma) + ms*b1**2
+    # Q_r[1,0] = -(ms*lt+mt*b2)*l*cos(alpha) - ms*b1*l*cos(beta)
+    # Q_r[1,1] = ms*b1*lt*cos(gamma) + ms*lt**2 + mt*b2**2
+    # Q_r[1,2] = ms*b1*lt*cos(gamma) + ms*b1**2
+    #
+    # Q_l = np.zeros((2,2))
+    # Q_l[1,1] = ms*(lt+b1)**2 + mt*b2**2
+    # Q_l[1,0] = -(ms*(b1+lt) + mt*b2) * l*cos(alpha)
+    # Q_l[0,1] = Q_l[1,0] + ms*(lt+b1)**2 + mt*b2**2
+    # Q_l[0,0] = Q_l[1,0] + mt*(ls+a2)**2 + (mh+mt+ms)*l**2 + ms*a1**2
 
-    Q_r = np.zeros((2,3))
-    Q_r[0,0] = -(ms*lt+mt*b2)*l*cos(alpha) - ms*b1*l*cos(beta) + (mt+ms+mh)*l**2 + ms*a1**2 + mt*(ls+a2)**2
-    Q_r[0,1] = -(ms*lt+mt*b2)*l*cos(alpha) + ms*b1*lt*cos(gamma) + mt*b2**2 + ms*lt**2
-    Q_r[0,2] = -ms*b1*l*cos(beta) + ms*b1*lt*cos(gamma) + ms*b1**2
-    Q_r[1,0] = -(ms*lt+mt*b2)*l*cos(alpha) - ms*b1*l*cos(beta)
-    Q_r[1,1] = ms*b1*lt*cos(gamma) + ms*lt**2 + mt*b2**2
-    Q_r[1,2] = ms*b1*lt*cos(gamma) + ms*b1**2
+    q21 = -(ms*lt+mt*b2)*l*cos(q1-q3) - ms*b2*l*cos(q1-q2)
+    q22 = ms*b1*lt*cos(q2-q3) + mt*b2**2 + ms*lt**2
+    q23 = ms*b1*lt*cos(q2-q3) + ms*b1**2
+    q11 = q21 + (mt+ms+mh)*l**2 + ms*a1**2 + mt*(ls+a2)**2
+    q12 = -(ms*lt+mt*b2)*l*cos(q1-q2) + ms*b1*lt*cos(q2-q3) + mt*b2**2 + ms*lt**2
+    q13 = -ms*b1*l*cos(q1-q3) + ms*b1*lt*cos(q2-q3) + ms*b1**2
+    Q_r = [[q11, q12, q13], [q21, q22, q23]]
 
-    Q_l = np.zeros((2,2))
-    Q_l[1,1] = ms*(lt+b1)**2 + mt*b2**2
-    Q_l[1,0] = -(ms*(b1+lt) + mt*b2) * l*cos(alpha)
-    Q_l[0,1] = Q_l[1,0] + ms*(lt+b1)**2 + mt*b2**2
-    Q_l[0,0] = Q_l[1,0] + mt*(ls+a2)**2 + (mh+mt+ms)*l**2 + ms*a1**2
+    q21 = -(ms*(b1+lt)+mt*b2)*l*cos(q1-q2)
+    q22 = ms*(lt+b1)**2 + mt*b2**2
+    q11 = q21 + mt*(ls+a2)**2 + (mh+ms+mt)*l**2 + ms*a1**2
+    q12 = q21 + ms*(lt+b1)**2 + mt*b2**2
+    Q_l = [[q11,q12],[q21,q22]]
 
     q_r = [state[1],state[3],state[5]]
     rhs = np.dot(Q_r,q_r)
@@ -239,21 +255,32 @@ def heel_strike(state):
     q1 = state[0]
     q2 = state[2]
 
-    alpha = cos(q1-q2)
+    '''using equations from MIT thesis, WRONG!'''
+    # alpha = cos(q1-q2)
+    #
+    # Q_r = np.zeros((2,2))
+    # Q_r[0,1] = -ms*a1*(lt+b1) + mt*b2*(ls+a2)
+    # Q_r[0,0] = Q_r[0,1] + (mh*l + 2*mt*(a2+ls) + ms*a1) * l*cos(alpha)
+    # Q_r[1,1] = 0
+    # Q_r[1,0] = Q_r[0,1]
+    #
+    # Q_l = np.zeros((2,2))
+    # Q_l[1,0] = -(ms*(b1+lt) + mt*b2) * l*cos(alpha)
+    # Q_l[0,0] = Q_l[1,0] + (ms+mt+mh)*l**2 + ms*a1**2 + mt*(a2+ls)**2
+    # Q_l[0,1] = Q_l[1,0] + ms*(b1+lt)**2 + mt*b2**2
+    # Q_l[1,1] = ms*(lt+b1)**2 + mt*b2**2
 
-    Q_r = np.zeros((2,2))
-    Q_r[0,1] = -ms*a1*(lt+b1) + mt*b2*(ls+a2)
-    Q_r[0,0] = Q_r[0,1] + (mh*l + 2*mt*(a2+ls) + ms*a1) * l*cos(alpha)
-    Q_r[1,1] = 0
-    Q_r[1,0] = Q_r[0,1]
+    q12 = -ms*a1*(lt+b1) - mt*b2*(ls+a2)
+    q11 = (mh*l+2*mt*(a2+ls)+2*ms*a1)*l*cos(q1-q2) + q12
+    Q_r = [[q11,q12],[q12,0]]
 
-    Q_l = np.zeros((2,2))
-    Q_l[1,0] = -(ms*(b1+lt) + mt*b2) * l*cos(alpha)
-    Q_l[0,0] = Q_l[1,0] + (ms+mt+mh)*l**2 + ms*a1**2 + mt*(a2+ls)**2
-    Q_l[0,1] = Q_l[1,0] + ms*(b1+lt)**2 + mt*b2**2
-    Q_l[1,1] = ms*(lt+b1)**2 + mt*b2**2
+    q21 = -(ms*(b1+lt)+mt*b2)*l*cos(q1-q2)
+    q22 = ms*(lt+b1)**2 + mt*b2**2
+    q11 = mt*(ls+a2)**2 + (mh+ms+mt)*l**2 + ms*a1**2 +q21
+    q12 = ms*(lt+b1)**2 + mt*b2**2 + q21
+    Q_l = [[q11,q12],[q21,q22]]
 
-    q_r = [state[1],state[3]]
+    q_r = [state[1],state[5]]
     rhs = np.dot(Q_r,q_r)
     sol = np.linalg.solve(Q_l,rhs)
 
@@ -263,9 +290,9 @@ def heel_strike(state):
     xd[0] = state[0]
     xd[2] = state[2]
     xd[4] = state[2]
-    xd[1] = sol[0]
-    xd[3] = sol[1]
-    xd[5] = sol[1]
+    xd[1] = sol[1]
+    xd[3] = sol[0]
+    xd[5] = sol[0]
 
     return xd
 
@@ -326,7 +353,6 @@ def step_cycle(state,pos_sf,_time,step_out=0):
                 q2d = state[-1, 1]
                 q3 = state[-1, 0]
                 q3d = state[-1, 1]
-                tmp = [q1, state[0, 1], q2, state[0, 3], q3,state[0, 5]]  ##############################ATTENTION HERE!
                 tmp = [q1, q1d, q2, q2d, q3, q3d]  ##############################ATTENTION HERE!
                 state = np.insert(state, [len(state)], tmp, axis=0)
                 if step_out:
@@ -490,12 +516,12 @@ def robo(show_ani):
 
     global g,dt
     g = 9.8  # acceleration due to gravity, in m/s^2
-    dt = 0.001 # time step of simulation
+    dt = 0.0001 # time step of simulation
     step_idx = 1
     step_tt = 1
     step_out = 0  # show state information at every time step of the first step cycle
     if show_ani:
-        step_tt = 6
+        step_tt = 3
         step_out = 1  # show state information at every time step of the first step cycle
 
     # slop of terran
@@ -517,7 +543,7 @@ def robo(show_ani):
     # state = integrate.odeint(three_linked_chain, state, t)
 
 ######
-    '''
+
     from scikits.odes import ode
 
     # solver = ode('cvode', three_linked_chain, old_api=False)
@@ -529,13 +555,13 @@ def robo(show_ani):
     # for t, u in zip(solution.values.t, solution.values.y):
     #     print('{0:>4.0f} {1:15.6g} '.format(t, u[0]))
 
-    solver = ode('cvode', rhseqn, nr_rootfns=1, rootfn=root_fn, old_api=False)
-    t_end2 = 100.0  # Time of free fall for experiments 3,4
-    tspan = np.arange(0, t_end2 + 1, 1.0, np.float)
-    y0 = [1, 0.1]
+    # solver = ode('cvode', rhseqn, nr_rootfns=1, rootfn=root_fn, old_api=False)
+    # t_end2 = 100.0  # Time of free fall for experiments 3,4
+    # tspan = np.arange(0, t_end2 + 1, 1.0, np.float)
+    # y0 = [1, 0.1]
     # print_results(1, solver.solve(tspan, y0))
 
-    solver = ode('cvode', three_linked_chain, nr_rootfns=1, rootfn=root_ks, old_api=False)
+    solver = ode('cvode', three_linked_chain_rt, nr_rootfns=1, rootfn=root_ks, old_api=False)
     tspan = t
     y0 = state
     result = solver.solve(tspan, y0)
@@ -563,7 +589,7 @@ def robo(show_ani):
     x_sf = np.zeros_like(x_h)
     y_sf = np.zeros_like(x_h)
     '''
-
+'''
     # start walking....
     x_h, y_h, x_nsk, y_nsk, x_nsf, y_nsf,state, success = step_cycle(state, pos_sf, dt, step_out)
     step_time = len(x_h)
@@ -634,10 +660,10 @@ def robo(show_ani):
         ymax = max([max(orbit[:, 1]), max(orbit[:, 3]), max(orbit[:, 5])])
         xmin = min([min(orbit[:, 0]), min(orbit[:, 2]), min(orbit[:, 4])])
         xmax = max([max(orbit[:, 0]), max(orbit[:, 2]), max(orbit[:, 4])])
-        # ymin = -2.5
-        # ymax = 2.5
-        # xmin = -0.3
-        # xmax = 0.4
+        ymin = -2.5
+        ymax = 2.5
+        xmin = -0.3
+        xmax = 0.4
         ax1.set_xlim([xmin, xmax])
         ax1.set_ylim([ymin, ymax])
         ax1.grid(True)

@@ -46,13 +46,12 @@
       <file leaf-file-name="robo.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/robo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="463" column="11" selection-start-line="463" selection-start-column="11" selection-end-line="463" selection-end-column="11" />
+            <state relative-caret-position="491">
+              <caret line="561" column="0" selection-start-line="561" selection-start-column="0" selection-end-line="562" selection-end-column="0" />
               <folding>
-                <element signature="e#4422#5174#0" expanded="false" />
-                <element signature="e#15282#16691#1" expanded="false" />
-                <marker date="1462404593567" expanded="false" signature="177:1447" placeholder="..." />
-                <marker date="1462404593567" expanded="false" signature="1898:3157" placeholder="..." />
+                <element signature="e#4486#5238#0" expanded="false" />
+                <element signature="e#5269#7088#0" expanded="false" />
+                <element signature="e#7118#8325#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -486,11 +485,11 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32747805" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.43641913" sideWeight="0.69380057" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43641913" sideWeight="0.69380057" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3407935" sideWeight="0.81832886" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3407935" sideWeight="0.81832886" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -525,22 +524,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/robo.py</url>
-          <line>415</line>
+          <line>441</line>
           <option name="timeStamp" value="197" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/robo.py</url>
-          <line>546</line>
+          <line>572</line>
           <option name="timeStamp" value="204" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/robo.py</url>
-          <line>8</line>
-          <option name="timeStamp" value="206" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/robo.py</url>
-          <line>597</line>
+          <line>623</line>
           <option name="timeStamp" value="209" />
         </line-breakpoint>
       </breakpoints>
@@ -571,10 +565,9 @@
         <state relative-caret-position="4425">
           <caret line="295" column="2" selection-start-line="295" selection-start-column="2" selection-end-line="295" selection-end-column="2" />
           <folding>
-            <element signature="e#4422#5174#0" expanded="false" />
-            <element signature="e#15282#16691#1" expanded="false" />
-            <marker date="1462404593567" expanded="false" signature="177:1447" placeholder="..." />
-            <marker date="1462404593567" expanded="false" signature="1898:3157" placeholder="..." />
+            <element signature="e#4486#5238#0" expanded="false" />
+            <element signature="e#5269#7088#0" expanded="false" />
+            <element signature="e#7118#8325#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -623,10 +616,9 @@
         <state relative-caret-position="4425">
           <caret line="295" column="2" selection-start-line="295" selection-start-column="2" selection-end-line="295" selection-end-column="2" />
           <folding>
-            <element signature="e#4422#5174#0" expanded="false" />
-            <element signature="e#15282#16691#1" expanded="false" />
-            <marker date="1462404593567" expanded="false" signature="177:1447" placeholder="..." />
-            <marker date="1462404593567" expanded="false" signature="1898:3157" placeholder="..." />
+            <element signature="e#4486#5238#0" expanded="false" />
+            <element signature="e#5269#7088#0" expanded="false" />
+            <element signature="e#7118#8325#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -675,10 +667,9 @@
         <state relative-caret-position="4425">
           <caret line="295" column="2" selection-start-line="295" selection-start-column="2" selection-end-line="295" selection-end-column="2" />
           <folding>
-            <element signature="e#4422#5174#0" expanded="false" />
-            <element signature="e#15282#16691#1" expanded="false" />
-            <marker date="1462404593567" expanded="false" signature="177:1447" placeholder="..." />
-            <marker date="1462404593567" expanded="false" signature="1898:3157" placeholder="..." />
+            <element signature="e#4486#5238#0" expanded="false" />
+            <element signature="e#5269#7088#0" expanded="false" />
+            <element signature="e#7118#8325#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -727,10 +718,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#4422#5174#0" expanded="false" />
-            <element signature="e#15282#16691#1" expanded="false" />
-            <marker date="1462404593567" expanded="false" signature="177:1447" placeholder="..." />
-            <marker date="1462404593567" expanded="false" signature="1898:3157" placeholder="..." />
+            <element signature="e#4486#5238#0" expanded="false" />
+            <element signature="e#5269#7088#0" expanded="false" />
+            <element signature="e#7118#8325#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -769,10 +759,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#4422#5174#0" expanded="false" />
-            <element signature="e#15282#16691#1" expanded="false" />
-            <marker date="1462404593567" expanded="false" signature="177:1447" placeholder="..." />
-            <marker date="1462404593567" expanded="false" signature="1898:3157" placeholder="..." />
+            <element signature="e#4486#5238#0" expanded="false" />
+            <element signature="e#5269#7088#0" expanded="false" />
+            <element signature="e#7118#8325#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -972,13 +961,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/robo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="463" column="11" selection-start-line="463" selection-start-column="11" selection-end-line="463" selection-end-column="11" />
+        <state relative-caret-position="491">
+          <caret line="561" column="0" selection-start-line="561" selection-start-column="0" selection-end-line="562" selection-end-column="0" />
           <folding>
-            <element signature="e#4422#5174#0" expanded="false" />
-            <element signature="e#15282#16691#1" expanded="false" />
-            <marker date="1462404593567" expanded="false" signature="177:1447" placeholder="..." />
-            <marker date="1462404593567" expanded="false" signature="1898:3157" placeholder="..." />
+            <element signature="e#4486#5238#0" expanded="false" />
+            <element signature="e#5269#7088#0" expanded="false" />
+            <element signature="e#7118#8325#0" expanded="false" />
           </folding>
         </state>
       </provider>
