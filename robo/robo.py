@@ -324,18 +324,23 @@ def init():
 import sys
 def animate(i):
     try:
-        x_bipedal = [x_sf[i], x_sk[i], x_h[i], x_nsk[i], x_nsf[i]]
-        y_bipedal = [y_sf[i], y_sk[i], y_h[i], y_nsk[i], y_nsf[i]]
-        # k=0
-        # x_bipedal = [x_sf[i], x_sk[i], x_h[k], x_nsk[k], x_nsf[k]]
-        # y_bipedal = [y_sf[i], y_sk[i], y_h[k], y_nsk[k], y_nsf[k]]
+        # x_bipedal = [x_sf[i], x_sk[i], x_h[i], x_nsk[i], x_nsf[i]]
+        # y_bipedal = [y_sf[i], y_sk[i], y_h[i], y_nsk[i], y_nsf[i]]
+        x_sl = [x_sf[i],x_sk[i],x_h[i]]
+        y_sl = [y_sf[i],y_sk[i],y_h[i]]
+        x_nst = [x_h[i], x_nsk[i]]
+        y_nst = [y_h[i], y_nsk[i]]
+        x_nss = [x_nsk[i], x_nsf[i]]
+        y_nss = [y_nsk[i], y_nsf[i]]
     except:
         sys.exit("wrong in animating walking!")
     x_slop = [x_slop_up,x_slop_low,-2]
     y_slop = [y_slop_up,y_slop_low,y_slop_low]
 
-    xlist = [x_bipedal, x_slop]
-    ylist = [y_bipedal, y_slop]
+    # xlist = [x_bipedal, x_slop]
+    # ylist = [y_bipedal, y_slop]
+    xlist = [x_sl, x_nst, x_nss, x_slop]
+    ylist = [y_sl, y_nst, y_nss, y_slop]
 
     for lnum,line in enumerate(lines):
         line.set_data(xlist[lnum], ylist[lnum]) # set data for each line separately.
@@ -394,7 +399,7 @@ def show_animation():
 
 
     ax2.set_xlim([-2, 2])
-    ax2.set_ylim([-2, 2])
+    ax2.set_ylim([-0.1, 2])
     # ax2.axis('auto')
     ax2.grid(True)
     ax1.set_xlabel('q')
@@ -404,9 +409,13 @@ def show_animation():
 
     global lines, time_text
     lines = []
-    lobj = ax2.plot([], [], 'o-', lw=2, color="black")[0]
+    lobj = ax2.plot([], [], '.-', lw=2, color="black")[0]
     lines.append(lobj)
-    lobj = ax2.plot([], [], lw=2, color="red")[0]
+    lobj = ax2.plot([], [], '.-', lw=2, color="red")[0]
+    lines.append(lobj)
+    lobj = ax2.plot([], [], '.-', lw=2, color="blue")[0]
+    lines.append(lobj)
+    lobj = ax2.plot([], [], '.-', lw=2, color="black")[0]
     lines.append(lobj)
 
     time_text = ax2.text(0.05, 0.9, '', transform=ax2.transAxes)
@@ -467,7 +476,7 @@ def robo(show_ani):
     step_tt = 1 # how many steps going to walk
     step_out = 0  # show state information at every time step of the first step cycle
     if show_ani:
-        step_tt = 30
+        step_tt = 5
         step_out = 1  # show state information at every time step of the first step cycle
 
     # slop of terran
@@ -486,96 +495,97 @@ def robo(show_ani):
     pos_sf = [0,0]
     # state = [q1, -1.1014, q2, -0.0399, q3, -0.0399]
     while True:
-        solver = ode('cvode', three_linked_chain_rt, nr_rootfns=1, rootfn=root_ks, old_api=False)
-        print('init condition: ',ini_state )
-        result = solver.solve([0,1], ini_state ) # detect event, generally it takes less than one second to reach knee strike
-        print('time to knee strike: ', result.roots.t)
-        print('three link dynamics end state: ',result.roots.y)
-        t = np.arange(0.0, result.roots.t, dt)
-        t = np.append(t,result.roots.t) # add event time stamp, right continuous
-        tmp = integrate.odeint(three_linked_chain, ini_state , t)  # integrate three chain dynamics
-        state = np.insert(tmp[1:len(tmp) + 1], [0], ini_state , axis=0)
+        try:
+            solver = ode('cvode', three_linked_chain_rt, nr_rootfns=1, rootfn=root_ks, old_api=False)
+            result = solver.solve([0,1], ini_state ) # detect event, generally it takes less than one second to reach knee strike
+            t = np.arange(0.0, result.roots.t, dt)
+            t = np.append(t,result.roots.t) # add event time stamp, right continuous
+            tmp = integrate.odeint(three_linked_chain, ini_state , t)  # integrate three chain dynamics
+            state = np.insert(tmp[1:len(tmp) + 1], [0], ini_state , axis=0)
+            if step_out:
+                print('init condition: ',ini_state )
+                print('time to knee strike: ', result.roots.t)
+                print('three link dynamics end state: ',result.roots.y)
 
-        tmp = knee_strike(state[-1])
-        state = np.insert(state, [len(state)], tmp, axis=0)
-        print('knee strike end state: ',state[-1])
+            tmp = knee_strike(state[-1])
+            state = np.insert(state, [len(state)], tmp, axis=0)
+            if step_out:
+                print('knee strike end state: ',state[-1])
 
-        solver = ode('cvode', two_linked_chain_rt, nr_rootfns=1, rootfn=root_hs, old_api=False)
-        result = solver.solve([0,0.5], state[-1]) # detect event, generally it takes less than half second to reach heel strike
-        print('time to heel strike: ', result.roots.t)
-        print('two link dynamics end state: ',result.roots.y)
-        t = np.arange(0.0, result.roots.t, dt)
-        t = np.append(t,result.roots.t) # add event time stamp, right continuous
-        tmp = integrate.odeint(two_linked_chain, state[-1], t) # integrate two chain dynamics
-        state = np.insert(tmp[1:len(tmp) + 1], [0], state, axis=0)
+            solver = ode('cvode', two_linked_chain_rt, nr_rootfns=1, rootfn=root_hs, old_api=False)
+            result = solver.solve([0,0.5], state[-1]) # detect event, generally it takes less than half second to reach heel strike
+            t = np.arange(0.0, result.roots.t, dt)
+            t = np.append(t,result.roots.t) # add event time stamp, right continuous
+            tmp = integrate.odeint(two_linked_chain, state[-1], t) # integrate two chain dynamics
+            state = np.insert(tmp[1:len(tmp) + 1], [0], state, axis=0)
+            if step_out:
+                print('time to heel strike: ', result.roots.t)
+                print('two link dynamics end state: ', result.roots.y)
 
-        tmp = heel_strike(state[-1])
-        state = np.insert(state, [len(state)], tmp, axis=0)
-        print('heel strike end state: ',state[-1])
+            tmp = heel_strike(state[-1])
+            state = np.insert(state, [len(state)], tmp, axis=0)
+            if step_out:
+                print('heel strike end state: ',state[-1])
 
-        if step_idx ==1:
-            time_idx = len(state)
-        else:
-            time_idx = len(state) + tt_time_step[-1]
-        tt_time_step += [time_idx]
+            if step_idx ==1:
+                time_idx = len(state)
+            else:
+                time_idx = len(state) + tt_time_step[-1]
+            tt_time_step += [time_idx]
 
-        if step_idx%2 ==1:
-            orbit_q1 = np.append(orbit_q1,state[:, 0])
-            orbit_q2 = np.append(orbit_q2,state[:, 2])
-            orbit_q3 = np.append(orbit_q3,state[:, 4])
-            orbit_q1d = np.append(orbit_q1d,state[:, 1])
-            orbit_q2d = np.append(orbit_q2d,state[:, 3])
-            orbit_q3d = np.append(orbit_q3d,state[:, 5])
-        else:
-            orbit_q1 = np.append(orbit_q1,state[:, 2])
-            orbit_q2 = np.append(orbit_q2,state[:, 0])
-            orbit_q3 = np.append(orbit_q3,state[:, 0])
-            orbit_q1d = np.append(orbit_q1d,state[:, 3])
-            orbit_q2d = np.append(orbit_q2d,state[:, 1])
-            orbit_q3d = np.append(orbit_q3d,state[:, 1])
+            if step_idx%2 ==1:
+                orbit_q1 = np.append(orbit_q1,state[:, 0])
+                orbit_q2 = np.append(orbit_q2,state[:, 2])
+                orbit_q3 = np.append(orbit_q3,state[:, 4])
+                orbit_q1d = np.append(orbit_q1d,state[:, 1])
+                orbit_q2d = np.append(orbit_q2d,state[:, 3])
+                orbit_q3d = np.append(orbit_q3d,state[:, 5])
+            else:
+                orbit_q1 = np.append(orbit_q1,state[:, 2])
+                orbit_q2 = np.append(orbit_q2,state[:, 0])
+                orbit_q3 = np.append(orbit_q3,state[:, 0])
+                orbit_q1d = np.append(orbit_q1d,state[:, 3])
+                orbit_q2d = np.append(orbit_q2d,state[:, 1])
+                orbit_q3d = np.append(orbit_q3d,state[:, 1])
 
-        if step_idx==1:
-            t_start = 0
-            t_end = tt_time_step[-1]
-        else:
-            t_start = tt_time_step[-2]
-            t_end = tt_time_step[-1]
+            if step_idx==1:
+                t_start = 0
+                t_end = tt_time_step[-1]
+            else:
+                t_start = tt_time_step[-2]
+                t_end = tt_time_step[-1]
 
-        q1 = state[:, 0]
-        q2 = state[:, 2]
-        q3 = state[:, 4]
+            q1 = state[:, 0]
+            q2 = state[:, 2]
+            q3 = state[:, 4]
 
-        x_sf_tmp = np.ones_like(q1) * pos_sf[0]
-        x_sf = np.append(x_sf,x_sf_tmp)
-        y_sf_tmp = np.ones_like(q1) * pos_sf[1]
-        y_sf = np.append(y_sf,y_sf_tmp)
+            x_sf_tmp = np.ones_like(q1) * pos_sf[0]
+            x_sf = np.append(x_sf,x_sf_tmp)
+            y_sf_tmp = np.ones_like(q1) * pos_sf[1]
+            y_sf = np.append(y_sf,y_sf_tmp)
 
-        x_h_tmp = x_sf_tmp - l * sin(q1)
-        x_h = np.append(x_h,x_h_tmp)
-        y_h_tmp = y_sf_tmp + l * cos(q1)
-        y_h = np.append(y_h,y_h_tmp)
+            x_h_tmp = x_sf_tmp - l * sin(q1)
+            x_h = np.append(x_h,x_h_tmp)
+            y_h_tmp = y_sf_tmp + l * cos(q1)
+            y_h = np.append(y_h,y_h_tmp)
 
-        x_nsk_tmp =  x_h_tmp + lt * sin(q2)
-        x_nsk = np.append(x_nsk,x_nsk_tmp)
-        y_nsk_tmp = y_h_tmp - lt * cos(q2)
-        y_nsk = np.append(y_nsk,y_nsk_tmp)
+            x_nsk_tmp =  x_h_tmp + lt * sin(q2)
+            x_nsk = np.append(x_nsk,x_nsk_tmp)
+            y_nsk_tmp = y_h_tmp - lt * cos(q2)
+            y_nsk = np.append(y_nsk,y_nsk_tmp)
 
-        x_nsf_tmp = x_nsk_tmp + ls * sin(q3)
-        x_nsf = np.append(x_nsf,x_nsf_tmp)
-        y_nsf_tmp = y_nsk_tmp - ls * cos(q3)
-        y_nsf = np.append(y_nsf,y_nsf_tmp)
+            x_nsf_tmp = x_nsk_tmp + ls * sin(q3)
+            x_nsf = np.append(x_nsf,x_nsf_tmp)
+            y_nsf_tmp = y_nsk_tmp - ls * cos(q3)
+            y_nsf = np.append(y_nsf,y_nsf_tmp)
 
-
-        ini_state = [state[-1, 4],state[-1, 5],state[-1, 0],state[-1, 1],state[-1, 0],state[-1, 1]]
-        print('state',state)
-        pos_sf = [x_nsf[-1], y_nsf[-1]]
-        if step_idx==step_tt:
-            break
-        step_idx += 1
-
-        if step_idx==1:
-            diff = [x-y for x,y in zip(ini_state, state[0])] # difference in starting state of two step cycle
-            stability = np.linalg.norm(diff) ** 2
+            ini_state = [state[-1, 4],state[-1, 5],state[-1, 0],state[-1, 1],state[-1, 0],state[-1, 1]]
+        except:
+            output = [[10000, -10000]] # something unexpected. set it as very unstable and slow.
+            np.savetxt('out.txt', output, delimiter='  ')
+        if step_idx == 1:
+            diff = [x - y for x, y in zip(ini_state, state[0])]  # difference in starting state of two step cycle
+            stability = np.linalg.norm(diff)
             v1 = [cos(_gamma), -sin(_gamma)]
             v2 = [x_nsf[-1], y_nsf[-1]]
             disp = np.dot(v1, v2)
@@ -586,13 +596,20 @@ def robo(show_ani):
             output = [[stability, speed]]
             np.savetxt('out.txt', output, delimiter='  ')
 
+        pos_sf = [x_nsf[-1], y_nsf[-1]]
+        if step_idx==step_tt:
+            break
+        step_idx += 1
+
+
     x_sk = x_h * (c_a1 + c_b1) + x_sf * (c_a2 + c_b2)
     y_sk = y_h * (c_a1 + c_b1) + y_sf * (c_a2 + c_b2)
     s =  (c_a1 + c_b1) +  (c_a2 + c_b2)
     x_sk /= s
     y_sk /= s
 
-    show_animation()
+    if show_ani:
+        show_animation()
 
 
 from numpy import sin, cos
@@ -602,5 +619,5 @@ import math
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-# robo(1)
+robo(1)
 

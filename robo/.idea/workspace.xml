@@ -21,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="opt_robo.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="opt_robo.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/opt_robo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+            <state relative-caret-position="217">
+              <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
               <folding>
                 <element signature="e#202#237#0" expanded="true" />
               </folding>
@@ -33,11 +33,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="robo.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="result.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/result.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-773">
+              <caret line="12090" column="37" selection-start-line="12090" selection-start-column="37" selection-end-line="12090" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="robo.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/robo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="126" column="0" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
+            <state relative-caret-position="487">
+              <caret line="622" column="0" selection-start-line="622" selection-start-column="0" selection-end-line="622" selection-end-column="0" />
               <folding>
                 <element signature="e#33#136#0" expanded="false" />
                 <element signature="e#182#1448#0" expanded="false" />
@@ -48,11 +58,27 @@
                 <element signature="e#4258#5010#0" expanded="false" />
                 <element signature="e#5041#6860#0" expanded="false" />
                 <element signature="e#6890#8097#0" expanded="false" />
-                <element signature="e#8116#8229#0" expanded="false" />
-                <element signature="e#8263#9379#0" expanded="false" />
-                <element signature="e#9407#11421#0" expanded="false" />
-                <element signature="e#11447#17599#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bestresult.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bestresult.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-128">
+              <caret line="68" column="29" selection-start-line="68" selection-start-column="29" selection-end-line="68" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="out.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/out.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -60,8 +86,8 @@
       <file leaf-file-name="parameters.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/parameters.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="26" selection-start-line="0" selection-start-column="26" selection-end-line="0" selection-end-column="26" />
+            <state relative-caret-position="15">
+              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -81,21 +107,22 @@
       <list>
         <option value="$PROJECT_DIR$/cmaes.py" />
         <option value="$PROJECT_DIR$/cma.py" />
-        <option value="$PROJECT_DIR$/out.txt" />
         <option value="$PROJECT_DIR$/result_1.txt" />
         <option value="$PROJECT_DIR$/pareto.txt" />
-        <option value="$PROJECT_DIR$/result.txt" />
         <option value="$PROJECT_DIR$/iteration.txt" />
-        <option value="$PROJECT_DIR$/parameters.txt" />
         <option value="$PROJECT_DIR$/opt_robo.py" />
+        <option value="$PROJECT_DIR$/parameters.txt" />
+        <option value="$PROJECT_DIR$/result.txt" />
+        <option value="$PROJECT_DIR$/out.txt" />
+        <option value="$PROJECT_DIR$/bestresult.txt" />
         <option value="$PROJECT_DIR$/robo.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="65" />
+    <option name="x" value="1920" />
     <option name="y" value="-4" />
-    <option name="width" value="1855" />
+    <option name="width" value="1920" />
     <option name="height" value="1084" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -426,10 +453,10 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
+    <frame x="1920" y="-4" width="1920" height="1084" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10781671" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.104166664" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4771109" sideWeight="0.18167116" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32655138" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -439,7 +466,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4760936" sideWeight="0.81832886" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20651068" sideWeight="0.81832886" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -468,14 +495,9 @@
           <option name="timeStamp" value="68" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/opt_robo.py</url>
-          <line>44</line>
-          <option name="timeStamp" value="169" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/robo.py</url>
-          <line>346</line>
-          <option name="timeStamp" value="248" />
+          <line>345</line>
+          <option name="timeStamp" value="256" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -488,18 +510,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="255" />
+      <option name="time" value="257" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.5/site-packages/matplotlib/backends/backend_qt5.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1890">
-          <caret line="150" column="0" selection-start-line="150" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/robo.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4425">
@@ -514,10 +529,6 @@
             <element signature="e#4258#5010#0" expanded="false" />
             <element signature="e#5041#6860#0" expanded="false" />
             <element signature="e#6890#8097#0" expanded="false" />
-            <element signature="e#8116#8229#0" expanded="false" />
-            <element signature="e#8263#9379#0" expanded="false" />
-            <element signature="e#9407#11421#0" expanded="false" />
-            <element signature="e#11447#17599#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -575,10 +586,6 @@
             <element signature="e#4258#5010#0" expanded="false" />
             <element signature="e#5041#6860#0" expanded="false" />
             <element signature="e#6890#8097#0" expanded="false" />
-            <element signature="e#8116#8229#0" expanded="false" />
-            <element signature="e#8263#9379#0" expanded="false" />
-            <element signature="e#9407#11421#0" expanded="false" />
-            <element signature="e#11447#17599#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -636,10 +643,6 @@
             <element signature="e#4258#5010#0" expanded="false" />
             <element signature="e#5041#6860#0" expanded="false" />
             <element signature="e#6890#8097#0" expanded="false" />
-            <element signature="e#8116#8229#0" expanded="false" />
-            <element signature="e#8263#9379#0" expanded="false" />
-            <element signature="e#9407#11421#0" expanded="false" />
-            <element signature="e#11447#17599#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -697,10 +700,6 @@
             <element signature="e#4258#5010#0" expanded="false" />
             <element signature="e#5041#6860#0" expanded="false" />
             <element signature="e#6890#8097#0" expanded="false" />
-            <element signature="e#8116#8229#0" expanded="false" />
-            <element signature="e#8263#9379#0" expanded="false" />
-            <element signature="e#9407#11421#0" expanded="false" />
-            <element signature="e#11447#17599#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -748,10 +747,6 @@
             <element signature="e#4258#5010#0" expanded="false" />
             <element signature="e#5041#6860#0" expanded="false" />
             <element signature="e#6890#8097#0" expanded="false" />
-            <element signature="e#8116#8229#0" expanded="false" />
-            <element signature="e#8263#9379#0" expanded="false" />
-            <element signature="e#9407#11421#0" expanded="false" />
-            <element signature="e#11447#17599#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -830,13 +825,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/out.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/anaconda3/lib/python3.5/site-packages/matplotlib/animation.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="478">
@@ -863,14 +851,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="2039" column="0" selection-start-line="2039" selection-start-column="0" selection-end-line="2039" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -925,7 +905,7 @@
     </entry>
     <entry file="file://$USER_HOME$/anaconda3/lib/python3.5/site-packages/numpy/lib/npyio.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
+        <state relative-caret-position="242">
           <caret line="802" column="0" selection-start-line="802" selection-start-column="0" selection-end-line="802" selection-end-column="0" />
           <folding />
         </state>
@@ -933,26 +913,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/parameters.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="26" selection-start-line="0" selection-start-column="26" selection-end-line="0" selection-end-column="26" />
+        <state relative-caret-position="15">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/opt_robo.py">
+    <entry file="file://$PROJECT_DIR$/out.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding>
-            <element signature="e#202#237#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="15">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bestresult.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-128">
+          <caret line="68" column="29" selection-start-line="68" selection-start-column="29" selection-end-line="68" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/robo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="126" column="0" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
+        <state relative-caret-position="487">
+          <caret line="622" column="0" selection-start-line="622" selection-start-column="0" selection-end-line="622" selection-end-column="0" />
           <folding>
             <element signature="e#33#136#0" expanded="false" />
             <element signature="e#182#1448#0" expanded="false" />
@@ -963,10 +949,24 @@
             <element signature="e#4258#5010#0" expanded="false" />
             <element signature="e#5041#6860#0" expanded="false" />
             <element signature="e#6890#8097#0" expanded="false" />
-            <element signature="e#8116#8229#0" expanded="false" />
-            <element signature="e#8263#9379#0" expanded="false" />
-            <element signature="e#9407#11421#0" expanded="false" />
-            <element signature="e#11447#17599#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/result.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-773">
+          <caret line="12090" column="37" selection-start-line="12090" selection-start-column="37" selection-end-line="12090" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/opt_robo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+          <folding>
+            <element signature="e#202#237#0" expanded="true" />
           </folding>
         </state>
       </provider>

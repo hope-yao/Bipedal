@@ -34,13 +34,12 @@ c_b2 = 0.325
 # c_a2 = 0.25
 # c_b2 = 0.25
 leg_struc = np.array([q1, q2, q3, c_a1, c_b1, c_a2, c_b2])
-# 0.1894 -0.2942 -0.2942 0.375 0.125 0.175 0.352
 global cnt
 cnt = 0
 
-para_file = 'parameters.txt'
-np.savetxt(para_file, [leg_struc], delimiter='  ')
-robo.robo(1)
+# para_file = 'parameters.txt'
+# np.savetxt(para_file, [leg_struc], delimiter='  ')
+# robo.robo(1)
 
 def obj_fun(x,arg):
     arg[0] = arg[0] + 1
@@ -77,11 +76,10 @@ def obj_fun(x,arg):
 
 
 pareto_para = [[],[]]
-num_pareto_points = 10
+num_pareto_points = 100
 tt = [(i / (num_pareto_points+1)) for i in range(num_pareto_points+1)]
 tt.pop(0)
-tt = [1]
-print(tt)
+print('pareto ratio: ',tt)
 for w in tt:
     pareto_para[0] = w
     pareto_para[1] = 1 - w
@@ -105,17 +103,19 @@ for w in tt:
     para_bound = [(0.15,0.2),(-0.3,-0.2),(-0.3,-0.2),(0.2,0.4),(0.1,0.26),(0.1,0.26),(0.2,0.4)]
     res = minimize(obj_fun, leg_struc, args=[cnt,0], method='L-BFGS-B', jac=None, bounds=para_bound, tol=1e-4, options={ 'maxiter':5000, 'disp': False})
 
-    # f = open('bestresult.txt', 'a')
-    # f.write(str(result)[1:-1])
-    # f.write('\n')
-    # f.close()
-
     # import barecmaes2 as cma
     # x = cma.fmin(obj_fun, leg_struc, 0.5, args=0)
 
     print('optimization result:')
     print(res)
-    robo.robo(1)
+    result_obj = np.loadtxt('out.txt', delimiter='  ')
+    result_para = np.loadtxt('parameters.txt', delimiter='  ')
+    result = result_para.tolist() + result_obj.tolist()
+    f = open('bestresult.txt', 'a')
+    f.write(str(result)[1:-1])
+    f.write('\n')
+    f.close()
+    # robo.robo(1)
 
 
 # fmin_l_bfgs_b(obj_fun, leg_struc, approx_grad=True, bounds=None, m=10, factr=10000000.0, pgtol=1e-05, epsilon=1e-08, iprint=-1, maxfun=15000, maxiter=15000, disp=None, callback=None, maxls=20)
