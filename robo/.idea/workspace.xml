@@ -21,21 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="pareto.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pareto.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="opt_robo.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/opt_robo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="36" column="48" selection-start-line="36" selection-start-column="48" selection-end-line="36" selection-end-column="48" />
+            <state relative-caret-position="30">
+              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding>
                 <element signature="e#202#237#0" expanded="true" />
               </folding>
@@ -46,63 +36,23 @@
       <file leaf-file-name="robo.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/robo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="491">
-              <caret line="561" column="0" selection-start-line="561" selection-start-column="0" selection-end-line="562" selection-end-column="0" />
+            <state relative-caret-position="22">
+              <caret line="126" column="0" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
               <folding>
-                <element signature="e#4486#5238#0" expanded="false" />
-                <element signature="e#5269#7088#0" expanded="false" />
-                <element signature="e#7118#8325#0" expanded="false" />
+                <element signature="e#33#136#0" expanded="false" />
+                <element signature="e#182#1448#0" expanded="false" />
+                <element signature="e#1478#1575#0" expanded="false" />
+                <element signature="e#1662#2434#0" expanded="false" />
+                <element signature="e#2465#2938#0" expanded="false" />
+                <element signature="e#2978#4219#0" expanded="false" />
+                <element signature="e#4258#5010#0" expanded="false" />
+                <element signature="e#5041#6860#0" expanded="false" />
+                <element signature="e#6890#8097#0" expanded="false" />
+                <element signature="e#8116#8229#0" expanded="false" />
+                <element signature="e#8263#9379#0" expanded="false" />
+                <element signature="e#9407#11421#0" expanded="false" />
+                <element signature="e#11447#17599#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_pydev_execfile.py" pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ode.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/anaconda3/lib/python3.5/site-packages/scikits.odes-2.2.2.dev0-py3.5-linux-x86_64.egg/scikits/odes/ode.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="318" column="0" selection-start-line="318" selection-start-column="0" selection-end-line="318" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="iteration.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/iteration.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="result.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/result.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="2039" column="0" selection-start-line="2039" selection-start-column="0" selection-end-line="2039" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="result_1.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/result_1.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203100">
-              <caret line="13540" column="0" selection-start-line="13540" selection-start-column="0" selection-end-line="13540" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -136,8 +86,8 @@
         <option value="$PROJECT_DIR$/pareto.txt" />
         <option value="$PROJECT_DIR$/result.txt" />
         <option value="$PROJECT_DIR$/iteration.txt" />
-        <option value="$PROJECT_DIR$/opt_robo.py" />
         <option value="$PROJECT_DIR$/parameters.txt" />
+        <option value="$PROJECT_DIR$/opt_robo.py" />
         <option value="$PROJECT_DIR$/robo.py" />
       </list>
     </option>
@@ -202,7 +152,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.robo">
+  <component name="RunManager" selected="Python.opt_robo">
     <configuration default="false" name="Nosetests in robo" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -437,8 +387,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.robo" />
-        <item index="1" class="java.lang.String" itemvalue="Python.opt_robo" />
+        <item index="0" class="java.lang.String" itemvalue="Python.opt_robo" />
+        <item index="1" class="java.lang.String" itemvalue="Python.robo" />
         <item index="2" class="java.lang.String" itemvalue="Python.cma" />
         <item index="3" class="java.lang.String" itemvalue="Python tests.Doctests in barecmaes2" />
         <item index="4" class="java.lang.String" itemvalue="Python tests.Nosetests in robo" />
@@ -482,14 +432,14 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10781671" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4771109" sideWeight="0.18167116" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32747805" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32655138" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43641913" sideWeight="0.69380057" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36724314" sideWeight="0.69380057" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3407935" sideWeight="0.81832886" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4760936" sideWeight="0.81832886" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -524,18 +474,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/robo.py</url>
-          <line>441</line>
-          <option name="timeStamp" value="197" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/robo.py</url>
-          <line>572</line>
-          <option name="timeStamp" value="204" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/robo.py</url>
-          <line>623</line>
-          <option name="timeStamp" value="209" />
+          <line>346</line>
+          <option name="timeStamp" value="248" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -548,7 +488,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="210" />
+      <option name="time" value="255" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -565,9 +505,19 @@
         <state relative-caret-position="4425">
           <caret line="295" column="2" selection-start-line="295" selection-start-column="2" selection-end-line="295" selection-end-column="2" />
           <folding>
-            <element signature="e#4486#5238#0" expanded="false" />
-            <element signature="e#5269#7088#0" expanded="false" />
-            <element signature="e#7118#8325#0" expanded="false" />
+            <element signature="e#33#136#0" expanded="false" />
+            <element signature="e#182#1448#0" expanded="false" />
+            <element signature="e#1478#1575#0" expanded="false" />
+            <element signature="e#1662#2434#0" expanded="false" />
+            <element signature="e#2465#2938#0" expanded="false" />
+            <element signature="e#2978#4219#0" expanded="false" />
+            <element signature="e#4258#5010#0" expanded="false" />
+            <element signature="e#5041#6860#0" expanded="false" />
+            <element signature="e#6890#8097#0" expanded="false" />
+            <element signature="e#8116#8229#0" expanded="false" />
+            <element signature="e#8263#9379#0" expanded="false" />
+            <element signature="e#9407#11421#0" expanded="false" />
+            <element signature="e#11447#17599#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -616,9 +566,19 @@
         <state relative-caret-position="4425">
           <caret line="295" column="2" selection-start-line="295" selection-start-column="2" selection-end-line="295" selection-end-column="2" />
           <folding>
-            <element signature="e#4486#5238#0" expanded="false" />
-            <element signature="e#5269#7088#0" expanded="false" />
-            <element signature="e#7118#8325#0" expanded="false" />
+            <element signature="e#33#136#0" expanded="false" />
+            <element signature="e#182#1448#0" expanded="false" />
+            <element signature="e#1478#1575#0" expanded="false" />
+            <element signature="e#1662#2434#0" expanded="false" />
+            <element signature="e#2465#2938#0" expanded="false" />
+            <element signature="e#2978#4219#0" expanded="false" />
+            <element signature="e#4258#5010#0" expanded="false" />
+            <element signature="e#5041#6860#0" expanded="false" />
+            <element signature="e#6890#8097#0" expanded="false" />
+            <element signature="e#8116#8229#0" expanded="false" />
+            <element signature="e#8263#9379#0" expanded="false" />
+            <element signature="e#9407#11421#0" expanded="false" />
+            <element signature="e#11447#17599#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -667,9 +627,19 @@
         <state relative-caret-position="4425">
           <caret line="295" column="2" selection-start-line="295" selection-start-column="2" selection-end-line="295" selection-end-column="2" />
           <folding>
-            <element signature="e#4486#5238#0" expanded="false" />
-            <element signature="e#5269#7088#0" expanded="false" />
-            <element signature="e#7118#8325#0" expanded="false" />
+            <element signature="e#33#136#0" expanded="false" />
+            <element signature="e#182#1448#0" expanded="false" />
+            <element signature="e#1478#1575#0" expanded="false" />
+            <element signature="e#1662#2434#0" expanded="false" />
+            <element signature="e#2465#2938#0" expanded="false" />
+            <element signature="e#2978#4219#0" expanded="false" />
+            <element signature="e#4258#5010#0" expanded="false" />
+            <element signature="e#5041#6860#0" expanded="false" />
+            <element signature="e#6890#8097#0" expanded="false" />
+            <element signature="e#8116#8229#0" expanded="false" />
+            <element signature="e#8263#9379#0" expanded="false" />
+            <element signature="e#9407#11421#0" expanded="false" />
+            <element signature="e#11447#17599#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -718,9 +688,19 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#4486#5238#0" expanded="false" />
-            <element signature="e#5269#7088#0" expanded="false" />
-            <element signature="e#7118#8325#0" expanded="false" />
+            <element signature="e#33#136#0" expanded="false" />
+            <element signature="e#182#1448#0" expanded="false" />
+            <element signature="e#1478#1575#0" expanded="false" />
+            <element signature="e#1662#2434#0" expanded="false" />
+            <element signature="e#2465#2938#0" expanded="false" />
+            <element signature="e#2978#4219#0" expanded="false" />
+            <element signature="e#4258#5010#0" expanded="false" />
+            <element signature="e#5041#6860#0" expanded="false" />
+            <element signature="e#6890#8097#0" expanded="false" />
+            <element signature="e#8116#8229#0" expanded="false" />
+            <element signature="e#8263#9379#0" expanded="false" />
+            <element signature="e#9407#11421#0" expanded="false" />
+            <element signature="e#11447#17599#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -759,9 +739,19 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#4486#5238#0" expanded="false" />
-            <element signature="e#5269#7088#0" expanded="false" />
-            <element signature="e#7118#8325#0" expanded="false" />
+            <element signature="e#33#136#0" expanded="false" />
+            <element signature="e#182#1448#0" expanded="false" />
+            <element signature="e#1478#1575#0" expanded="false" />
+            <element signature="e#1662#2434#0" expanded="false" />
+            <element signature="e#2465#2938#0" expanded="false" />
+            <element signature="e#2978#4219#0" expanded="false" />
+            <element signature="e#4258#5010#0" expanded="false" />
+            <element signature="e#5041#6860#0" expanded="false" />
+            <element signature="e#6890#8097#0" expanded="false" />
+            <element signature="e#8116#8229#0" expanded="false" />
+            <element signature="e#8263#9379#0" expanded="false" />
+            <element signature="e#9407#11421#0" expanded="false" />
+            <element signature="e#11447#17599#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -815,22 +805,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="169">
           <caret line="454" column="0" selection-start-line="454" selection-start-column="0" selection-end-line="454" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.5/site-packages/scipy/integrate/odepack.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="214" column="0" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.5/site-packages/numpy/lib/npyio.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="666" column="23" selection-start-line="666" selection-start-column="23" selection-end-line="666" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -925,14 +899,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.5/site-packages/scikits.odes-2.2.2.dev0-py3.5-linux-x86_64.egg/scikits/odes/ode.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="318" column="0" selection-start-line="318" selection-start-column="0" selection-end-line="318" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -941,13 +907,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/opt_robo.py">
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.5/site-packages/scipy/integrate/odepack.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="36" column="48" selection-start-line="36" selection-start-column="48" selection-end-line="36" selection-end-column="48" />
-          <folding>
-            <element signature="e#202#237#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="209">
+          <caret line="215" column="22" selection-start-line="215" selection-start-column="21" selection-end-line="215" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.5/site-packages/scikits.odes-2.2.2.dev0-py3.5-linux-x86_64.egg/scikits/odes/ode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="318" column="0" selection-start-line="318" selection-start-column="0" selection-end-line="318" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.5/site-packages/numpy/lib/npyio.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="802" column="0" selection-start-line="802" selection-start-column="0" selection-end-line="802" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -959,14 +939,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/opt_robo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding>
+            <element signature="e#202#237#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/robo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="491">
-          <caret line="561" column="0" selection-start-line="561" selection-start-column="0" selection-end-line="562" selection-end-column="0" />
+        <state relative-caret-position="22">
+          <caret line="126" column="0" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
           <folding>
-            <element signature="e#4486#5238#0" expanded="false" />
-            <element signature="e#5269#7088#0" expanded="false" />
-            <element signature="e#7118#8325#0" expanded="false" />
+            <element signature="e#33#136#0" expanded="false" />
+            <element signature="e#182#1448#0" expanded="false" />
+            <element signature="e#1478#1575#0" expanded="false" />
+            <element signature="e#1662#2434#0" expanded="false" />
+            <element signature="e#2465#2938#0" expanded="false" />
+            <element signature="e#2978#4219#0" expanded="false" />
+            <element signature="e#4258#5010#0" expanded="false" />
+            <element signature="e#5041#6860#0" expanded="false" />
+            <element signature="e#6890#8097#0" expanded="false" />
+            <element signature="e#8116#8229#0" expanded="false" />
+            <element signature="e#8263#9379#0" expanded="false" />
+            <element signature="e#9407#11421#0" expanded="false" />
+            <element signature="e#11447#17599#0" expanded="false" />
           </folding>
         </state>
       </provider>
