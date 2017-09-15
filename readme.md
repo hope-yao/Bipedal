@@ -18,13 +18,13 @@ Passive dyanmic walking in python
 
 To run the code, simple by:
 ```
-$ python robo.py
+$ python ./robo/robo.py
 ```
 
 
 ## Physical problem
-A lot of credits goes to this [paper](http://groups.csail.mit.edu/robotics-center/public_papers/Hsu07.pdf)
-Sepcial notice to h_233 in equation 3.2b of this paper. There should be a negative sign to it.
+A lot of credits goes to [this csail master thesis](http://groups.csail.mit.edu/robotics-center/public_papers/Hsu07.pdf)
+It is worth notice that a negative sign is missing for h_233 in equation 3.2b of this paper.
 
 ![struc](/../master/assets/knee.PNG)
 

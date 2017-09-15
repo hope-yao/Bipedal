@@ -594,7 +594,7 @@ def robo(show_ani):
             else:
                 speed = disp
             output = [[stability, speed]]
-            np.savetxt('out.txt', output, delimiter='  ')
+            np.savetxt('../data/out.txt', output, delimiter='  ')
 
         pos_sf = [x_nsf[-1], y_nsf[-1]]
         if step_idx==step_tt:

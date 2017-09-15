@@ -46,10 +46,10 @@ def obj_fun(x,arg):
     show_ani = arg[1]
     # print(">>>>>>>>>>>>>>>>>>>>>>>leg structure<<<<<<<<<<<<<<<<<<<<<<<<<<<")
     # print(x)
-    para_file = 'parameters.txt'
+    para_file = '../data/parameters.txt'
     np.savetxt(para_file, [x], delimiter='  ')
     robo.robo(show_ani)
-    out_file = 'out.txt'
+    out_file = '../data/out.txt'
     obj_val = np.loadtxt(out_file, delimiter='  ')
     # minimize negative displacement
     paerto_obj = obj_val[0] * pareto_para[0] - obj_val[1]*pareto_para[1]
@@ -57,17 +57,17 @@ def obj_fun(x,arg):
     iter_info = [arg[0]] + obj_val.tolist()
     print('number of simulation:',iter_info[0])
     print('obj value:', iter_info[1:3])
-    f = open('iteration.txt', 'a')
+    f = open('../data/iteration.txt', 'a')
     f.write(str(iter_info)[1:-1])
     f.write('\n')
     f.close()
 
     # obj with initial para:
     # save for T-SNE
-    result_obj = np.loadtxt('out.txt', delimiter='  ')
-    result_para = np.loadtxt('parameters.txt', delimiter='  ')
+    result_obj = np.loadtxt('../data/out.txt', delimiter='  ')
+    result_para = np.loadtxt('../data/parameters.txt', delimiter='  ')
     result = result_para.tolist() + result_obj.tolist()
-    f = open('result.txt', 'a')
+    f = open('../data/result.txt', 'a')
     f.write(str(result)[1:-1])
     f.write('\n')
     f.close()
@@ -108,10 +108,10 @@ for w in tt:
 
     print('optimization result:')
     print(res)
-    result_obj = np.loadtxt('out.txt', delimiter='  ')
-    result_para = np.loadtxt('parameters.txt', delimiter='  ')
+    result_obj = np.loadtxt('../data/out.txt', delimiter='  ')
+    result_para = np.loadtxt('../data/parameters.txt', delimiter='  ')
     result = result_para.tolist() + result_obj.tolist()
-    f = open('bestresult.txt', 'a')
+    f = open('../data/bestresult.txt', 'a')
     f.write(str(result)[1:-1])
     f.write('\n')
     f.close()

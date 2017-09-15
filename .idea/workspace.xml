@@ -1,32 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c3c79348-96d4-48a2-a1ed-f5cfc510ee69" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/Bipedal.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/out.txt" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Screenshot from 2016-04-23 14:43:44.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/link.PNG" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/robo/bestresult.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/robo/cma.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/robo/iteration.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/robo/out.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/robo/parameters.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/robo/result.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/simulator.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/thisx.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/untitled.txt" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/opt_robo.ipynb" afterPath="$PROJECT_DIR$/ipynb/opt_robo.ipynb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/parameters.txt" afterPath="$PROJECT_DIR$/data/parameters.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pareto.ipynb" afterPath="$PROJECT_DIR$/ipynb/pareto.ipynb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/robo.ipynb" afterPath="$PROJECT_DIR$/ipynb/robo.ipynb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/robo/Untitled.ipynb" afterPath="$PROJECT_DIR$/ipynb/Untitled.ipynb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/robo_tsne.ipynb" afterPath="$PROJECT_DIR$/ipynb/robo_tsne.ipynb" />
+    <list default="true" id="c3c79348-96d4-48a2-a1ed-f5cfc510ee69" name="Default" comment="readme">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/bestresult.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/iteration.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/result.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/parameters.txt" afterPath="$PROJECT_DIR$/data/parameters.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/readme.md" afterPath="$PROJECT_DIR$/readme.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/robo/opt_robo.py" afterPath="$PROJECT_DIR$/robo/opt_robo.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/robo/robo.py" afterPath="$PROJECT_DIR$/robo/robo.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -48,8 +30,8 @@
       <file leaf-file-name="robo.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/robo/robo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="584" column="32" selection-start-line="584" selection-start-column="32" selection-end-line="584" selection-end-column="32" />
+            <state relative-caret-position="495">
+              <caret line="588" column="44" selection-start-line="588" selection-start-column="44" selection-end-line="588" selection-end-column="44" />
               <folding>
                 <element signature="e#182#1448#0" expanded="false" />
                 <element signature="e#1256#1324#0" expanded="false" />
@@ -64,8 +46,8 @@
                 <element signature="e#6890#8097#0" expanded="false" />
                 <element signature="e#6977#6997#0" expanded="false" />
                 <element signature="e#8116#8229#0" expanded="false" />
-                <element signature="e#8276#8336#0" expanded="false" />
-                <element signature="e#8781#8810#0" expanded="false" />
+                <element signature="e#8345#8405#0" expanded="false" />
+                <element signature="e#8815#8844#0" expanded="false" />
                 <element signature="e#9120#9405#0" expanded="false" />
                 <element signature="e#9964#9977#0" expanded="false" />
                 <element signature="e#11768#11811#0" expanded="false" />
@@ -77,61 +59,7 @@
                 <element signature="e#16005#16348#0" expanded="false" />
                 <element signature="e#16394#16446#0" expanded="false" />
                 <element signature="e#16481#16548#0" expanded="false" />
-                <element signature="e#17708#18181#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Untitled.ipynb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ipynb/Untitled.ipynb">
-          <provider selected="true" editor-type-id="ipnb-editor">
-            <state>
-              <selected id="0" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="opt_robo.ipynb" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ipynb/opt_robo.ipynb">
-          <provider selected="true" editor-type-id="ipnb-editor">
-            <state>
-              <selected id="0" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="npyio.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/anaconda2/lib/python2.7/site-packages/numpy/lib/npyio.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="857" column="0" selection-start-line="857" selection-start-column="0" selection-end-line="857" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="readme.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/readme.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="380">
-                <caret line="48" column="21" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
-                <folding />
-              </first_editor>
-              <second_editor>
-                <js_state />
-              </second_editor>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="parameters.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/parameters.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -139,8 +67,8 @@
       <file leaf-file-name="opt_robo.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/robo/opt_robo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="66" column="51" selection-start-line="66" selection-start-column="51" selection-end-line="66" selection-end-column="51" />
+            <state relative-caret-position="120">
+              <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
               <folding>
                 <element signature="e#202#237#0" expanded="true" />
               </folding>
@@ -148,12 +76,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="barecmaes2.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/robo/barecmaes2.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="21" column="42" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="42" />
-              <folding />
+      <file leaf-file-name="readme.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/readme.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="75">
+                <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor>
+                <js_state />
+              </second_editor>
             </state>
           </provider>
         </entry>
@@ -172,17 +105,18 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/robo/bestresult.txt" />
-        <option value="$PROJECT_DIR$/readme.md" />
         <option value="$PROJECT_DIR$/data/parameters.txt" />
+        <option value="$PROJECT_DIR$/robo/opt_robo.py" />
         <option value="$PROJECT_DIR$/robo/robo.py" />
+        <option value="$PROJECT_DIR$/readme.md" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
-    <option name="y" value="-4" />
+    <option name="y" value="24" />
     <option name="width" value="1855" />
-    <option name="height" value="1084" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -210,7 +144,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -229,8 +162,51 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bipedal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bipedal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="robo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bipedal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bipedal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ipynb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bipedal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bipedal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -244,7 +220,7 @@
       <recent name="$PROJECT_DIR$/assets" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.robo">
+  <component name="RunManager" selected="Python.opt_robo">
     <configuration default="false" name="robo" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -419,8 +395,8 @@
     </list>
     <recent_temporary>
       <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Python.robo" />
-        <item index="1" class="java.lang.String" itemvalue="Python.opt_robo" />
+        <item index="0" class="java.lang.String" itemvalue="Python.opt_robo" />
+        <item index="1" class="java.lang.String" itemvalue="Python.robo" />
       </list>
     </recent_temporary>
   </component>
@@ -463,20 +439,27 @@
       <option name="project" value="LOCAL" />
       <updated>1505506667085</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="readme">
+      <created>1505507819295</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1505507819295</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
+    <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18395196" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35591397" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35591397" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -538,6 +521,51 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/robo/robo.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2835">
+          <caret line="584" column="32" selection-start-line="584" selection-start-column="32" selection-end-line="584" selection-end-column="32" />
+          <folding>
+            <element signature="e#182#1448#0" expanded="false" />
+            <element signature="e#1256#1324#0" expanded="false" />
+            <element signature="e#1478#1575#0" expanded="false" />
+            <element signature="e#1662#2434#0" expanded="false" />
+            <element signature="e#2465#2938#0" expanded="false" />
+            <element signature="e#2978#4219#0" expanded="false" />
+            <element signature="e#4097#4165#0" expanded="false" />
+            <element signature="e#4258#5010#0" expanded="false" />
+            <element signature="e#5041#6860#0" expanded="false" />
+            <element signature="e#5146#5166#0" expanded="false" />
+            <element signature="e#6890#8097#0" expanded="false" />
+            <element signature="e#6977#6997#0" expanded="false" />
+            <element signature="e#8116#8229#0" expanded="false" />
+            <element signature="e#8345#8405#0" expanded="false" />
+            <element signature="e#8815#8844#0" expanded="false" />
+            <element signature="e#9120#9405#0" expanded="false" />
+            <element signature="e#9964#9977#0" expanded="false" />
+            <element signature="e#11768#11811#0" expanded="false" />
+            <element signature="e#12837#12938#0" expanded="false" />
+            <element signature="e#13571#17490#0" expanded="false" />
+            <element signature="e#14148#14319#0" expanded="false" />
+            <element signature="e#15089#15206#0" expanded="false" />
+            <element signature="e#15627#15970#0" expanded="false" />
+            <element signature="e#16005#16348#0" expanded="false" />
+            <element signature="e#16394#16446#0" expanded="false" />
+            <element signature="e#16481#16548#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/robo/opt_robo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#202#237#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/robo/robo.py">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
@@ -554,8 +582,8 @@
             <element signature="e#6890#8097#0" expanded="false" />
             <element signature="e#6977#6997#0" expanded="false" />
             <element signature="e#8116#8229#0" expanded="false" />
-            <element signature="e#8276#8336#0" expanded="false" />
-            <element signature="e#8781#8810#0" expanded="false" />
+            <element signature="e#8345#8405#0" expanded="false" />
+            <element signature="e#8815#8844#0" expanded="false" />
             <element signature="e#9120#9405#0" expanded="false" />
             <element signature="e#9964#9977#0" expanded="false" />
             <element signature="e#11768#11811#0" expanded="false" />
@@ -567,7 +595,6 @@
             <element signature="e#16005#16348#0" expanded="false" />
             <element signature="e#16394#16446#0" expanded="false" />
             <element signature="e#16481#16548#0" expanded="false" />
-            <element signature="e#17708#18181#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -600,8 +627,8 @@
             <element signature="e#6890#8097#0" expanded="false" />
             <element signature="e#6977#6997#0" expanded="false" />
             <element signature="e#8116#8229#0" expanded="false" />
-            <element signature="e#8276#8336#0" expanded="false" />
-            <element signature="e#8781#8810#0" expanded="false" />
+            <element signature="e#8345#8405#0" expanded="false" />
+            <element signature="e#8815#8844#0" expanded="false" />
             <element signature="e#9120#9405#0" expanded="false" />
             <element signature="e#9964#9977#0" expanded="false" />
             <element signature="e#11768#11811#0" expanded="false" />
@@ -613,7 +640,6 @@
             <element signature="e#16005#16348#0" expanded="false" />
             <element signature="e#16394#16446#0" expanded="false" />
             <element signature="e#16481#16548#0" expanded="false" />
-            <element signature="e#17708#18181#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -636,8 +662,8 @@
             <element signature="e#6890#8097#0" expanded="false" />
             <element signature="e#6977#6997#0" expanded="false" />
             <element signature="e#8116#8229#0" expanded="false" />
-            <element signature="e#8276#8336#0" expanded="false" />
-            <element signature="e#8781#8810#0" expanded="false" />
+            <element signature="e#8345#8405#0" expanded="false" />
+            <element signature="e#8815#8844#0" expanded="false" />
             <element signature="e#9120#9405#0" expanded="false" />
             <element signature="e#9964#9977#0" expanded="false" />
             <element signature="e#11768#11811#0" expanded="false" />
@@ -649,7 +675,6 @@
             <element signature="e#16005#16348#0" expanded="false" />
             <element signature="e#16394#16446#0" expanded="false" />
             <element signature="e#16481#16548#0" expanded="false" />
-            <element signature="e#17708#18181#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -665,20 +690,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="449">
           <caret line="167" column="33" selection-start-line="167" selection-start-column="33" selection-end-line="167" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/link.PNG">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/link.PNG" />
     <entry file="file://$PROJECT_DIR$/robo/result.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -686,7 +705,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -698,58 +716,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/robo/cma.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/robo/opt_robo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="66" column="51" selection-start-line="66" selection-start-column="51" selection-end-line="66" selection-end-column="51" />
-          <folding>
-            <element signature="e#202#237#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/untitled.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thisx.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/robo/cma.py" />
+    <entry file="file://$PROJECT_DIR$/untitled.txt" />
+    <entry file="file://$PROJECT_DIR$/thisx.txt" />
     <entry file="file://$USER_HOME$/anaconda2/lib/python2.7/site-packages/numpy/lib/npyio.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="857" column="0" selection-start-line="857" selection-start-column="0" selection-end-line="857" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/readme.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="380">
-            <caret line="48" column="21" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
-            <folding />
-          </first_editor>
-          <second_editor>
-            <js_state />
-          </second_editor>
         </state>
       </provider>
     </entry>
@@ -769,10 +743,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ipynb/Untitled.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="-1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ipynb/opt_robo.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="-1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/robo/robo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="584" column="32" selection-start-line="584" selection-start-column="32" selection-end-line="584" selection-end-column="32" />
+        <state relative-caret-position="495">
+          <caret line="588" column="44" selection-start-line="588" selection-start-column="44" selection-end-line="588" selection-end-column="44" />
           <folding>
             <element signature="e#182#1448#0" expanded="false" />
             <element signature="e#1256#1324#0" expanded="false" />
@@ -787,8 +775,8 @@
             <element signature="e#6890#8097#0" expanded="false" />
             <element signature="e#6977#6997#0" expanded="false" />
             <element signature="e#8116#8229#0" expanded="false" />
-            <element signature="e#8276#8336#0" expanded="false" />
-            <element signature="e#8781#8810#0" expanded="false" />
+            <element signature="e#8345#8405#0" expanded="false" />
+            <element signature="e#8815#8844#0" expanded="false" />
             <element signature="e#9120#9405#0" expanded="false" />
             <element signature="e#9964#9977#0" expanded="false" />
             <element signature="e#11768#11811#0" expanded="false" />
@@ -800,22 +788,30 @@
             <element signature="e#16005#16348#0" expanded="false" />
             <element signature="e#16394#16446#0" expanded="false" />
             <element signature="e#16481#16548#0" expanded="false" />
-            <element signature="e#17708#18181#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ipynb/Untitled.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="-1" />
+    <entry file="file://$PROJECT_DIR$/robo/opt_robo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+          <folding>
+            <element signature="e#202#237#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ipynb/opt_robo.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="-1" />
+    <entry file="file://$PROJECT_DIR$/readme.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="75">
+            <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor>
+            <js_state />
+          </second_editor>
         </state>
       </provider>
     </entry>
