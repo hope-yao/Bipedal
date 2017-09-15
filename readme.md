@@ -7,9 +7,25 @@ Passive dyanmic walking in python
 
 
 
+## Requirements
+
+[ANACONDA](https://docs.anaconda.com/anaconda/install/)
+
+[scikits.odes](https://scikits.appspot.com/odes)
+
+> Note: For Ubuntu 14.04, FFMPEG is not included in the PPA.
+>For how to fix this problem, please refer to [here](https://www.faqforge.com/linux/how-to-install-ffmpeg-on-ubuntu-14-04/)
+
+To run the code, simple by:
+```
+$ python robo.py
+```
+
+
 ## Physical problem
 A lot of credits goes to this [paper](http://groups.csail.mit.edu/robotics-center/public_papers/Hsu07.pdf)
-Sepcial notice to one h_233 in this paper. There should be a negative sign to it.
+Sepcial notice to h_233 in equation 3.2b of this paper. There should be a negative sign to it.
+
 ![struc](/../master/assets/knee.PNG)
 
 | physcial | variables | value |
@@ -49,24 +65,9 @@ unactuated hybrid system :
 ![struc](/../master/assets/hybrid.PNG)
 
 
-## Requirements
-
-[ANACONDA](https://docs.anaconda.com/anaconda/install/)
-
-[scikits.odes](https://scikits.appspot.com/odes)
-
-> Note: For Ubuntu 14.04, FFMPEG is not included in the PPA.
->For how to fix this problem, please refer to [here](https://www.faqforge.com/linux/how-to-install-ffmpeg-on-ubuntu-14-04/)
-
-To run the code, simple by:
-```
-$ python robo.py
-```
-
-
 ## Optimization
 
-![model](/../master/assets/pareto.PNG)
+![model](/../master/assets/pareto.png)
 > Pareto surface for multi-objective optimization, x-axisrelates to the stability, y-axis relates to speed. Higher number indicates more stable or faster.
 
 

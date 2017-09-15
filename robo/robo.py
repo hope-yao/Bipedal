@@ -437,7 +437,7 @@ def robo(show_ani):
     # % reset
 
     # parameters of leg structure
-    paras = np.loadtxt('parameters.txt', delimiter='  ')
+    paras = np.loadtxt('../data/parameters.txt', delimiter='  ')
     try:
         last = paras[-1,:]
     except:
@@ -582,7 +582,7 @@ def robo(show_ani):
             ini_state = [state[-1, 4],state[-1, 5],state[-1, 0],state[-1, 1],state[-1, 0],state[-1, 1]]
         except:
             output = [[10000, -10000]] # something unexpected. set it as very unstable and slow.
-            np.savetxt('out.txt', output, delimiter='  ')
+            np.savetxt('../data/out.txt', output, delimiter='  ')
         if step_idx == 1:
             diff = [x - y for x, y in zip(ini_state, state[0])]  # difference in starting state of two step cycle
             stability = np.linalg.norm(diff)
@@ -619,5 +619,7 @@ import math
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-robo(1)
+
+if __name__ == '__main__':
+    robo(1)
 
