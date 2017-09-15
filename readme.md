@@ -2,7 +2,7 @@
 
 
 Passive dyanmic walking in python
-![model](/../master/assets/PDW.png)
+![model](/../master/assets/PDW.gif)
 
 ##Purpose
 
