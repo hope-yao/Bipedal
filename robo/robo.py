@@ -426,11 +426,11 @@ def show_animation():
     plt.show()
     print('end animation...')
     # Set up formatting for the movie files
-    # print('saving animation...')
-    # Writer = animation.writers['ffmpeg']
-    # writer = Writer(fps=100, metadata=dict(artist='Me'), bitrate=1800)
-    # ani.save('PDW.mp4', writer=writer)
-    # print('animation saved')
+    print('saving animation...')
+    Writer = animation.writers['ffmpeg']
+    writer = Writer(fps=100, metadata=dict(artist='Me'), bitrate=1800)
+    ani.save('PDW.mp4', writer=writer)
+    print('animation saved')
 
 def robo(show_ani):
     # Passive Dynamic Walking for bipedal robot
